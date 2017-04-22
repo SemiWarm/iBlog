@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String blogger = (String) session.getAttribute("bloggerName");
-    if (null != blogger && blogger.length() > 0) {
+    String bloggerName = (String) session.getAttribute("bloggerName");
+    if (null != bloggerName && bloggerName.length() > 0) {
         response.sendRedirect(request.getContextPath() + "/main");
     }
 %>

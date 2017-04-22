@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String blogger = (String) session.getAttribute("bloggerName");
-    if (null == blogger || blogger.length() <= 0) {
+    String bloggerName = (String) session.getAttribute("bloggerName");
+    if (null == bloggerName || bloggerName.length() <= 0) {
         response.sendRedirect(request.getContextPath() + "/");
     }
 %>
@@ -75,7 +75,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">
-                                风吹裙起屁屁凉
+                                <%=bloggerName%>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a></li>
