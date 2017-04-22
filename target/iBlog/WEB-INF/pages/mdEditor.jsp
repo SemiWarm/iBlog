@@ -103,6 +103,7 @@
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL: "<%=request.getContextPath()%>/upload/editormd/images",
             onfullscreen:function () {
+                // 解决编辑器工具栏被导航条挡住的问题
                 $('.editormd-fullscreen').css('position','relative');
             },
             onfullscreenExit : function() {

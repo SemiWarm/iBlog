@@ -1,11 +1,201 @@
 package cn.kpq.iBlog.controller;
 
+import cn.kpq.iBlog.entity.Image;
+import cn.kpq.iBlog.entity.UploadImageResponse;
+import cn.kpq.iBlog.service.impl.ImageServiceImpl;
+import cn.kpq.iBlog.utils.CommonFileUtils;
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.UUID;
 
 /**
- * 文件控制器
- * Created by alibct on 2017/4/21.
+ * 文件操作控制器
+ * Created by alibct on 2017/3/24.
  */
 @Controller
 public class FileController {
+
+    private final ImageServiceImpl imageService;
+
+    @Autowired
+    public FileController(ImageServiceImpl imageService) {
+        this.imageService = imageService;
+    }
+
+    /**
+     * editormd中上传单张图片的方法
+     *
+     * @param request     请求信息
+     * @param response    响应信息
+     * @param uploadImage 上传的图片
+     * @return 上传结果
+     */
+    @RequestMapping(value = "/upload/editormd/images", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public UploadImageResponse uploadEditormdImages(HttpSession session, HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile uploadImage) throws Exception {
+
+        // 初始化请求结果
+        UploadImageResponse imageResponse = new UploadImageResponse();
+
+        try {
+
+            if (!uploadImage.isEmpty()) {
+
+                Image image = initUploadImage(session, request, response, uploadImage, "editormd");
+
+                // 创建待上传的文件
+                File uploadFile = new File(image.getImageRealPath());
+                FileUtils.copyInputStreamToFile(uploadImage.getInputStream(), uploadFile);
+
+                // 需要将图片持久化到数据库中
+                int result = imageService.addImage(image);
+                if (result > 0) {
+                    imageResponse.setSuccess(1);
+                    imageResponse.setMessage("图片上传成功!");
+                    imageResponse.setUrl(image.getImageAccessPath());
+                } else {
+                    imageResponse.setSuccess(0);
+                    imageResponse.setMessage("图片上传失败!");
+                    imageResponse.setUrl("");
+                }
+
+            }
+
+        } catch (Exception e) {
+            imageResponse.setSuccess(0);
+            imageResponse.setMessage("图片上传失败!");
+            imageResponse.setUrl("");
+            e.printStackTrace();
+        }
+
+        return imageResponse;
+    }
+
+
+    /**
+     * 通用上传单张图片的方法
+     *
+     * @param session     session
+     * @param request     request
+     * @param response    response
+     * @param type        图片的类型
+     * @param uploadImage 需要上传的图片
+     * @return 上传结果
+     */
+    @RequestMapping(value = "/upload/{type}/image", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public UploadImageResponse uploadImage(HttpSession session, HttpServletRequest request, HttpServletResponse response, @PathVariable("type") String type, @RequestParam(value = "image", required = false) MultipartFile uploadImage) throws Exception {
+        // 初始化请求结果
+        UploadImageResponse imageResponse = new UploadImageResponse();
+
+        try {
+
+            if (!uploadImage.isEmpty()) {
+
+                Image image = initUploadImage(session, request, response, uploadImage, type);
+
+                // 创建待上传的文件
+                File uploadFile = new File(image.getImageRealPath());
+                FileUtils.copyInputStreamToFile(uploadImage.getInputStream(), uploadFile);
+
+                // 将图片持久化到数据库中
+                int result = imageService.addImage(image);
+
+                if (result > 0) {
+                    imageResponse.setSuccess(1);
+                    imageResponse.setMessage("图片上传成功!");
+                    imageResponse.setUrl(image.getImageAccessPath());
+                } else {
+                    imageResponse.setSuccess(0);
+                    imageResponse.setMessage("图片上传异常!");
+                    imageResponse.setUrl("");
+                }
+
+
+            } else {
+                imageResponse.setSuccess(-1);
+                imageResponse.setMessage("请先选择需要上传的图片!");
+                imageResponse.setUrl("");
+            }
+
+        } catch (Exception e) {
+            imageResponse.setSuccess(0);
+            imageResponse.setMessage("图片上传失败!");
+            imageResponse.setUrl("");
+        }
+
+        return imageResponse;
+    }
+
+    /**
+     * 初始化上传的图片信息
+     *
+     * @param session  session
+     * @param request  request
+     * @param response response
+     * @param image    需要上传的图片
+     * @param type     图片类型
+     * @return 实例化的图片
+     */
+    private Image initUploadImage(HttpSession session, HttpServletRequest request, HttpServletResponse response, MultipartFile image, String type) {
+
+        // 设置头信息
+        response.setHeader("Content-Type", "text/html");
+
+        // 根据图片类型初始化上传路径
+        String realPath = "/file/upload/images/".concat(type).concat("/");
+        // 上传的路径
+        String uploadPath = request.getSession().getServletContext().getRealPath(realPath);
+        // 根据上传路径初始化File对象
+        File uploadDir = new File(uploadPath);
+        // 如果文件夹不存在则创建文件夹
+        if (!uploadDir.exists()) {
+            boolean result = uploadDir.mkdirs();
+            if (result) {
+                System.out.println("文件夹创建成功!");
+            } else {
+                System.out.println("文件夹已存在!");
+            }
+        }
+
+        Image result = new Image();
+
+        // 图片原始名称
+        String imageOriginalName = image.getOriginalFilename();
+        // 图片扩展名
+        String imageExtensionName = CommonFileUtils.getExtensionName(imageOriginalName);
+        // 图片存储名称
+        String imageName = UUID.randomUUID().toString().concat(".").concat(imageExtensionName);
+        // 图片物理路径
+        String imageRealPath = uploadPath.concat(imageName);
+        // 图片访问路径
+        String imageAccessPath = "http://localhost:8080/upload/images/".concat(type).concat("/").concat(imageName);
+        // 图片大小
+        String imageSize = CommonFileUtils.formatFileSizeToString(image.getSize());
+        // 图片上传人
+        String uploadedBy = (String) session.getAttribute("bloggerName");
+        // 图片上传日期
+        // 数据库中有一个当前日期类型
+
+        result.setImageUuid(UUID.randomUUID().toString());
+        result.setImageOriginalName(imageOriginalName);
+        result.setImageName(imageName);
+        result.setImageExtensionName(imageExtensionName);
+        result.setImageRealPath(imageRealPath);
+        result.setImageAccessPath(imageAccessPath);
+        result.setImageSize(imageSize);
+        result.setImageType(type);
+        result.setUploadedBy(uploadedBy);
+
+        return result;
+
+    }
 }

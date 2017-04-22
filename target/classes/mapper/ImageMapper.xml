@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace是指明Mybatis扫描的目录，即cn.semiwarm.admin.mapper.xxxMapper -->
+<mapper namespace="cn.kpq.iBlog.mapper.ImageMapper">
+    <insert id="add" parameterType="cn.kpq.iBlog.entity.Image">
+        INSERT INTO Image (image_uuid, image_original_name, image_name, image_extension_name, image_real_path, image_access_path, image_size, image_type, uploaded_by, uploaded_at)
+        VALUES (#{imageUuid}, #{imageOriginalName}, #{imageName}, #{imageExtensionName}, #{imageRealPath},
+                              #{imageAccessPath}, #{imageSize}, #{imageType}, #{uploadedBy}, #{uploadedAt})
+    </insert>
+    <delete id="delete" parameterType="cn.kpq.iBlog.entity.Image">
+        DELETE FROM Image
+        WHERE image_uuid = #{imageUuid}
+    </delete>
+    <update id="update" parameterType="cn.kpq.iBlog.entity.Image">
+        UPDATE Image
+        SET
+            image_original_name  = #{imageOriginalName},
+            image_name           = #{imageName},
+            image_extension_name = #{imageExtensionName},
+            image_real_path      = #{imageRealPath},
+            image_access_path    = #{imageAccessPath},
+            image_size           = #{imageSize},
+            image_type           = #{imageType},
+            uploaded_by          = #{uploadedBy},
+            uploaded_at          = #{uploadedAt},
+            status               = #{status}
+        WHERE image_uuid = #{imageUuid}
+    </update>
+    <select id="findById" parameterType="cn.kpq.iBlog.entity.Image" resultType="cn.kpq.iBlog.entity.Image">
+        SELECT *
+        FROM Image
+        WHERE image_uuid = #{imageUuid} AND status = TRUE
+    </select>
+    <select id="findAll" resultType="cn.kpq.iBlog.entity.Image">
+        SELECT *
+        FROM Image
+    </select>
+
+    <select id="findByImageType" parameterType="java.lang.String" resultType="cn.kpq.iBlog.entity.Image">
+        SELECT *
+        FROM Image
+        WHERE image_type = #{imageType} AND status = TRUE
+    </select>
+</mapper>
