@@ -6,6 +6,12 @@
   Desc: 主页
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String blogger = (String) session.getAttribute("bloggerName");
+    if (null == blogger || blogger.length() <= 0) {
+        response.sendRedirect(request.getContextPath() + "/");
+    }
+%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -51,7 +57,7 @@
         <div class="container-fluid">
             <!-- 头部 -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/main">
                     <img alt="Brand" style="width: 32px;height: 18px"
                          src="<%=request.getContextPath()%>/static/images/iBlog.png">
                 </a>
@@ -81,7 +87,8 @@
                             </ul>
                         </li>
                     </ul>
-                    <button class="btn btn-warning navbar-btn" style="margin-left: 10px"><i class="fa fa-pencil"></i>&nbsp;&nbsp;写博客
+                    <button class="btn btn-warning navbar-btn" id="btnWriteBlog" style="margin-left: 10px"><i
+                            class="fa fa-pencil"></i>&nbsp;&nbsp;写博客
                     </button>
                 </div>
 
@@ -394,7 +401,11 @@
 
 </div>
 
-<div class="container">
-</div>
+<script type="text/javascript">
+    var btnWriteBlog = $('#btnWriteBlog');
+    btnWriteBlog.bind('click', function () {
+        window.open("<%=request.getContextPath()%>/editor", "_blank");
+    });
+</script>
 </body>
 </html>

@@ -6,6 +6,12 @@
   Desc: 主页登录
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String blogger = (String) session.getAttribute("bloggerName");
+    if (null != blogger && blogger.length() > 0) {
+        response.sendRedirect(request.getContextPath() + "/main");
+    }
+%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -88,30 +94,32 @@
 
 <div class="container">
 
-<div class="row vertical-align">
-    <div class="col-lg-12">
-        <form class="form-signin">
-            <h2 class="form-signin-heading logo hide-text">iBlog</h2>
-            <!-- 账号 -->
-            <label for="bloggerAccount" class="sr-only">Email address</label>
-            <input type="email" id="bloggerAccount" name="bloggerAccount" class="form-control" placeholder="邮箱" required
-                   autofocus>
-            <!-- 密码 -->
-            <label for="loginPassword" class="sr-only">Password</label>
-            <input type="password" id="loginPassword" name="loginPassword" class="form-control" placeholder="密码" required>
-            <!-- 注册和登录按钮 -->
-            <div class="row">
-                <div class="col-lg-5 pull-left">
-                    <button class="btn btn-lg btn-warning btn-block" type="button">注册</button>
+    <div class="row vertical-align">
+        <div class="col-lg-12">
+            <form class="form-signin">
+                <h2 class="form-signin-heading logo hide-text">iBlog</h2>
+                <!-- 账号 -->
+                <label for="bloggerAccount" class="sr-only">Email address</label>
+                <input type="email" id="bloggerAccount" name="bloggerAccount" class="form-control" placeholder="邮箱"
+                       required>
+                <!-- 密码 -->
+                <label for="loginPassword" class="sr-only">Password</label>
+                <input type="password" id="loginPassword" name="loginPassword" class="form-control" placeholder="密码"
+                       required>
+                <!-- 注册和登录按钮 -->
+                <div class="row">
+                    <div class="col-lg-5 pull-left">
+                        <button class="btn btn-lg btn-warning btn-block" type="button">注册</button>
+                    </div>
+                    <div class="col-lg-5 pull-right">
+                        <button class="btn btn-lg btn-primary btn-block" type="button" id="btnSignIn" name="btnSignIn">
+                            登录
+                        </button>
+                    </div>
                 </div>
-                <div class="col-lg-5 pull-right">
-                    <button class="btn btn-lg btn-primary btn-block" type="button" id="btnSignIn" name="btnSignIn">登录
-                    </button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
 </div>
 
@@ -123,30 +131,40 @@
     var loginPassword = $('#loginPassword');
     var btnSignIn = $('#btnSignIn');
 
-    btnSignIn.bind('click', function () {
-
-        if (checkInput().length > 0) {
-            sweetAlert("出错啦!", checkInput(), "error");
-        } else {
-            $.ajax({
-                type: 'post',
-                url: '<%=request.getContextPath()%>/signIn',
-                data: {'bloggerAccount': bloggerAccount.val(), 'loginPassword': loginPassword.val()},
-                async: true,
-                success: function (signInResponse) {
-                    if (signInResponse["success"] === 1) {
-                        sweetAlert("登录成功!", signInResponse["message"], "success");
-                    } else {
-                        sweetAlert("出错啦!", signInResponse["message"], "error");
-                    }
-                },
-                error: function (errorMessage) {
-                    sweetAlert("出错啦!", errorMessage, "error");
-                }
-            });
-        }
-
+    $(function () {
+        btnSignIn.bind('click', function () {
+            if (checkInput().length > 0) {
+                sweetAlert("出错啦!", checkInput(), "error");
+            } else {
+                doLogin();
+            }
+        });
     });
+
+    var doLogin = function () {
+        btnSignIn.text("登录中...");
+        btnSignIn.attr("disabled", true);
+        $.ajax({
+            type: 'post',
+            url: '<%=request.getContextPath()%>/signIn',
+            data: {'bloggerAccount': bloggerAccount.val(), 'loginPassword': loginPassword.val()},
+            async: true,
+            success: function (signInResponse) {
+                if (signInResponse["success"] === 1) {
+                    window.location.href = "<%=request.getContextPath()%>/main";
+                } else {
+                    sweetAlert("出错啦!", signInResponse["message"], "error");
+                    btnSignIn.text("登录");
+                    btnSignIn.attr("disabled", false);
+                }
+            },
+            error: function (errorMessage) {
+                sweetAlert("出错啦!", errorMessage, "error");
+                btnSignIn.text("登录");
+                btnSignIn.attr("disabled", false);
+            }
+        });
+    };
 
     var checkInput = function () {
         var resultInfo = "";

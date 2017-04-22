@@ -7,6 +7,7 @@ import cn.kpq.iBlog.service.BloggerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class BloggerServiceImpl implements BloggerService {
         return bloggerMapper.findAll();
     }
 
-    public BaseResponse<Blogger> signIn(Blogger blogger) throws Exception {
+    public BaseResponse<Blogger> signIn(HttpSession session, Blogger blogger) throws Exception {
 
         BaseResponse<Blogger> response = new BaseResponse<Blogger>();
         Blogger result = bloggerMapper.verifyByAccount(blogger);
@@ -49,6 +50,9 @@ public class BloggerServiceImpl implements BloggerService {
             response.setSuccess(1);
             response.setMessage("登录成功!");
             response.setData(null);
+
+            session.setAttribute("bloggerName",result.getBloggerName());
+
         } else {
             response.setSuccess(0);
             response.setMessage("登录失败!");

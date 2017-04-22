@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -53,7 +54,7 @@ public class BloggerController {
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public BaseResponse<Blogger> signIn(Blogger blogger) throws Exception {
-        return bloggerService.signIn(blogger);
+    public BaseResponse<Blogger> signIn(HttpSession session, Blogger blogger) throws Exception {
+        return bloggerService.signIn(session, blogger);
     }
 }

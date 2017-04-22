@@ -3,6 +3,7 @@ package cn.kpq.iBlog.service;
 import cn.kpq.iBlog.entity.BaseResponse;
 import cn.kpq.iBlog.entity.Blogger;
 
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,5 +21,5 @@ public interface BloggerService {
 
     List<Blogger> getAllBloggers() throws Exception;
 
-    BaseResponse<Blogger> signIn(Blogger blogger) throws Exception;
+    BaseResponse<Blogger> signIn(HttpSession session, Blogger blogger) throws Exception;
 }
