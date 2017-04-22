@@ -66,7 +66,7 @@
             <!-- 右侧 -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">发现</a></li>
+                    <li class="active"><a href="<%=request.getContextPath()%>/main">发现</a></li>
                     <li><a href="#">关注</a></li>
                 </ul>
 

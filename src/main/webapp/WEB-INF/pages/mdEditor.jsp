@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/bootstrap.min.css"/>
     <style>
         body {
-            padding-top: 70px;
+            padding-top: 50px;
         }
     </style>
 </head>
@@ -45,7 +45,7 @@
             <!-- 右侧 -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">发现</a></li>
+                    <li><a href="<%=request.getContextPath()%>/main">发现</a></li>
                     <li><a href="#">关注</a></li>
                 </ul>
 
@@ -96,18 +96,23 @@
         editor = editormd("mdEditor", {
             width: "90%",
             height: 640,
-            syncScrolling: "single",
             path: "<%=request.getContextPath()%>/static/lib/",
             saveHTMLToTextarea: true,
             emoji: true,
-            editorTheme: "solarized",
             imageUpload: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "<%=request.getContextPath()%>/upload/editormd/images"
+            imageUploadURL: "<%=request.getContextPath()%>/upload/editormd/images",
+            onfullscreen:function () {
+                // 解决编辑器工具栏被导航条挡住的问题
+                $('.editormd-fullscreen').css('position','relative');
+            },
+            onfullscreenExit : function() {
+                $('.editormd-fullscreen').css("position",'');
+            }
         });
     });
 
-    $("#getHtml").bind('click', function () {
+    $("#btnSavaBlog").bind('click', function () {
         alert(editor.getHTML());
     });
 </script>
