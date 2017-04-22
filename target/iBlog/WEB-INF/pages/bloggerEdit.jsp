@@ -113,6 +113,31 @@
                             </tr>
                             </thead>
                         </table>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="imagePreviewModal" tabindex="-1" role="dialog"
+                             aria-labelledby="imagePreviewModalLabel">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">图片预览</h4>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-default" type="button" data-dismiss="modal">
+                                            取消
+                                        </button>
+                                        <button class="btn btn-primary" type="button" data-dismiss="modal">
+                                            确定
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -183,7 +208,31 @@
 <script src="<%=request.getContextPath()%>/static/js/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript">
     var bloggerTable = $('#bloggerTable');
-    bloggerTable.bootstrapTable({data: ""});
+    $(function () {
+        // 页面加载完成后进行ajax请求
+        $.ajax({
+            type: 'get',
+            url: '<%=request.getContextPath()%>/bloggers',
+            // 同步请求解决布局错乱问题
+            async: false,
+            success: function (bloggers) {
+                // 请求成功后对每一个类目信息进行处理
+                $.each(bloggers, function (i, item) {
+                    item["bloggerAvatar"] = "<button type='button' class='btn btn-success btn-xs' data-toggle='modal' data-target='#imagePreviewModal' value='" + item["bloggerAvatar"] + "'>预览图片</button>";
+                });
+                bloggerTable.bootstrapTable({data: bloggers});
+            },
+            error: function (errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+    });
+
+    $('#imagePreviewModal').on('show.bs.modal', function (e) {
+        var bloggerAvatarUrl = $(e.relatedTarget);
+        // 获取预览图片按钮的value值
+        $('.modal-body').html("<img src='" + bloggerAvatarUrl.val() + "' alt=''>");
+    });
 </script>
 </body>
 </html>
