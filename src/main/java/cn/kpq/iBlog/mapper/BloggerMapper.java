@@ -20,4 +20,6 @@ public interface BloggerMapper extends BaseMapper<Blogger> {
     Blogger findById(Serializable id);
 
     List<Blogger> findAll();
+
+    Blogger verifyByAccount(Blogger blogger);
 }

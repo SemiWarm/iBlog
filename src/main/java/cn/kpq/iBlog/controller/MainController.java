@@ -12,6 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView index() throws Exception {
+        return new ModelAndView("forward:index");
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public ModelAndView admin() throws Exception {
         return new ModelAndView("admin");

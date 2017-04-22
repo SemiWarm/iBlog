@@ -30,4 +30,11 @@
         SELECT *
         FROM Blogger
     </select>
+
+    <!--登录验证-->
+    <select id="verifyByAccount" parameterType="cn.kpq.iBlog.entity.Blogger" resultType="cn.kpq.iBlog.entity.Blogger">
+        SELECT *
+        FROM Blogger
+        WHERE status = TRUE AND blogger_account = #{bloggerAccount} AND login_password = password(#{loginPassword})
+    </select>
 </mapper>

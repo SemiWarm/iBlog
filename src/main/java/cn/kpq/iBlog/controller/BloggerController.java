@@ -1,5 +1,6 @@
 package cn.kpq.iBlog.controller;
 
+import cn.kpq.iBlog.entity.BaseResponse;
 import cn.kpq.iBlog.entity.Blogger;
 import cn.kpq.iBlog.service.impl.BloggerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,12 @@ public class BloggerController {
     @ResponseBody
     public Blogger signUpBlogger(Blogger blogger) throws Exception {
         return null;
+    }
+
+
+    @RequestMapping(value = "/signIn", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public BaseResponse<Blogger> signIn(Blogger blogger) throws Exception {
+        return bloggerService.signIn(blogger);
     }
 }

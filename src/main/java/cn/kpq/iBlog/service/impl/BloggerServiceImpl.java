@@ -1,5 +1,6 @@
 package cn.kpq.iBlog.service.impl;
 
+import cn.kpq.iBlog.entity.BaseResponse;
 import cn.kpq.iBlog.entity.Blogger;
 import cn.kpq.iBlog.mapper.BloggerMapper;
 import cn.kpq.iBlog.service.BloggerService;
@@ -37,5 +38,23 @@ public class BloggerServiceImpl implements BloggerService {
 
     public List<Blogger> getAllBloggers() throws Exception {
         return bloggerMapper.findAll();
+    }
+
+    public BaseResponse<Blogger> signIn(Blogger blogger) throws Exception {
+
+        BaseResponse<Blogger> response = new BaseResponse<Blogger>();
+        Blogger result = bloggerMapper.verifyByAccount(blogger);
+
+        if (null != result) {
+            response.setSuccess(1);
+            response.setMessage("登录成功!");
+            response.setData(null);
+        } else {
+            response.setSuccess(0);
+            response.setMessage("登录失败!");
+            response.setData(null);
+        }
+
+        return response;
     }
 }

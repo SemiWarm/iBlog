@@ -1,5 +1,6 @@
 package cn.kpq.iBlog.service;
 
+import cn.kpq.iBlog.entity.BaseResponse;
 import cn.kpq.iBlog.entity.Blogger;
 
 import java.io.Serializable;
@@ -18,4 +19,6 @@ public interface BloggerService {
     Blogger getBloggerById(Serializable id) throws Exception;
 
     List<Blogger> getAllBloggers() throws Exception;
+
+    BaseResponse<Blogger> signIn(Blogger blogger) throws Exception;
 }

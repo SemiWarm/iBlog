@@ -229,6 +229,7 @@
     });
 
     $('#imagePreviewModal').on('show.bs.modal', function (e) {
+        // 获取启动模态框的对象
         var bloggerAvatarUrl = $(e.relatedTarget);
         // 获取预览图片按钮的value值
         $('.modal-body').html("<img src='" + bloggerAvatarUrl.val() + "' alt=''>");
