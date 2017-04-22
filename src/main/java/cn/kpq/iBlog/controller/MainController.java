@@ -19,8 +19,18 @@ public class MainController {
 
 
     @RequestMapping(value = "/main", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public ModelAndView index() throws Exception {
+    public ModelAndView main() throws Exception {
         return new ModelAndView("main");
+    }
+
+    @RequestMapping(value = "/blogger", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView blogger() throws Exception {
+        return new ModelAndView("bloggerEdit");
+    }
+
+    @RequestMapping(value = "/blog", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView blog() throws Exception {
+        return new ModelAndView("blogEdit");
     }
 
     @RequestMapping(value = "/editor", method = RequestMethod.GET, produces = "application/json;charset=utf-8")

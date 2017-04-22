@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace是指明Mybatis扫描的目录，即cn.semiwarm.admin.mapper.xxxMapper -->
+<mapper namespace="cn.kpq.iBlog.mapper.BloggerMapper">
+    <insert id="add" parameterType="cn.kpq.iBlog.entity.Blogger">
+        INSERT INTO Blogger (blogger_id, blogger_name, blogger_account, login_password, blogger_profile, blogger_avatar)
+        VALUES (#{bloggerId}, #{bloggerName}, #{bloggerAccount}, password(#{loginPassword}), #{bloggerProfile},
+                #{bloggerAvatar});
+    </insert>
+    <delete id="delete" parameterType="cn.kpq.iBlog.entity.Blogger">
+        DELETE FROM Blogger
+        WHERE blogger_id = #{bloggerId}
+    </delete>
+    <update id="update" parameterType="cn.kpq.iBlog.entity.Blogger">
+        UPDATE Blogger
+        SET blogger_name    = #{bloggerName},
+            blogger_account = #{bloggerAccount},
+            login_password  = #{loginPassword},
+            blogger_profile = #{bloggerProfile},
+            blogger_avatar  = #{bloggerAvatar}
+        WHERE blogger_id = #{bloggerId}
+    </update>
+    <select id="findById" parameterType="cn.kpq.iBlog.entity.Blogger" resultType="cn.kpq.iBlog.entity.Blogger">
+        SELECT *
+        FROM Blogger
+        WHERE blogger_id = #{bloggerId}
+    </select>
+
+    <select id="findAll" parameterType="cn.kpq.iBlog.entity.Blogger" resultType="cn.kpq.iBlog.entity.Blogger">
+        SELECT *
+        FROM Blogger
+    </select>
+</mapper>

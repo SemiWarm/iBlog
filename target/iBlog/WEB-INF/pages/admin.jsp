@@ -12,13 +12,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>管理页面</title>
-    <link href="<%=request.getContextPath()%>/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <div class="row">
-        <!-- 内容区域 -->
+        <!-- 导航 -->
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="<%=request.getContextPath()%>/admin">主页</a></li>
+                <li role="presentation"><a href="<%=request.getContextPath()%>/blogger">博主管理</a></li>
+                <li role="presentation"><a href="<%=request.getContextPath()%>/blog">博文管理</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 
