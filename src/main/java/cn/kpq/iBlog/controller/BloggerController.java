@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,8 +48,28 @@ public class BloggerController {
      */
     @RequestMapping(value = "/bloggers", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Blogger signUpBlogger(Blogger blogger) throws Exception {
-        return null;
+    public BaseResponse<Blogger> signUpBlogger(Blogger blogger) throws Exception {
+
+        BaseResponse<Blogger> response = new BaseResponse<Blogger>();
+
+        Date date = new Date();
+        Long bloggerId = date.getTime();
+        blogger.setBloggerId(bloggerId);
+        blogger.setStatus(true);
+
+        int result = bloggerService.addBlogger(blogger);
+
+        if (result > 0) {
+            response.setSuccess(1);
+            response.setMessage("注册成功!");
+            response.setData(blogger);
+        } else {
+            response.setSuccess(0);
+            response.setMessage("注册失败!");
+            response.setData(null);
+        }
+
+        return response;
     }
 
 

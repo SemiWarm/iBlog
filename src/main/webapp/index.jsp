@@ -111,7 +111,7 @@
                 <!-- 注册和登录按钮 -->
                 <div class="row">
                     <div class="col-lg-5 pull-left">
-                        <button class="btn btn-lg btn-warning btn-block" type="button">注册</button>
+                        <button class="btn btn-lg btn-warning btn-block" type="button" id="btnSignUp">注册</button>
                     </div>
                     <div class="col-lg-5 pull-right">
                         <button class="btn btn-lg btn-primary btn-block" type="button" id="btnSignIn" name="btnSignIn">
@@ -132,6 +132,7 @@
     var bloggerAccount = $('#bloggerAccount');
     var loginPassword = $('#loginPassword');
     var btnSignIn = $('#btnSignIn');
+    var btnSignUp = $('#btnSignUp');
 
     $(function () {
         btnSignIn.bind('click', function () {
@@ -140,6 +141,10 @@
             } else {
                 doLogin();
             }
+        });
+
+        btnSignUp.bind('click',function () {
+            window.location.href = "<%=request.getContextPath()%>/signUp";
         });
     });
 

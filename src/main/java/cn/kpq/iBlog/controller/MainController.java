@@ -17,6 +17,11 @@ public class MainController {
         return new ModelAndView("forward:index");
     }
 
+    @RequestMapping(value = "/signUp", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView signUp() throws Exception {
+        return new ModelAndView("signUp");
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public ModelAndView admin() throws Exception {
         return new ModelAndView("admin");
