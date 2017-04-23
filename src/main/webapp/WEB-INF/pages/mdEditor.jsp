@@ -161,12 +161,14 @@
                 text: "确定保存已完成的博文?",
                 type: "info",
                 showCancelButton: true,
+                cancelButtonText: "取消",
+                confirmButtonText: "确定",
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true
             },
             function () {
 
-                setTimeout(function(){
+                setTimeout(function () {
 
                     $.ajax({
                         // 请求发送方式
@@ -191,9 +193,13 @@
                                         title: "提示信息",
                                         text: "恭喜您!博文已保存是否查看?",
                                         type: "success",
-                                        showCancelButton: true
+                                        showCancelButton: true,
+                                        cancelButtonText: "取消",
+                                        confirmButtonText: "确定"
                                     },
                                     function () {
+                                        // 打开查看文章的界面
+                                        window.location.href = "<%=request.getContextPath()%>/showBlog/id/" + addBlogResponse["data"]["blogId"];
                                     });
                             } else {
                                 swal("提示信息", "好气啊!博文保存失败!", "error");

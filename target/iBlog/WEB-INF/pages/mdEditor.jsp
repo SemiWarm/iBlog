@@ -161,12 +161,14 @@
                 text: "确定保存已完成的博文?",
                 type: "info",
                 showCancelButton: true,
+                cancelButtonText: "取消",
+                confirmButtonText: "确定",
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true
             },
             function () {
 
-                setTimeout(function(){
+                setTimeout(function () {
 
                     $.ajax({
                         // 请求发送方式
@@ -185,23 +187,22 @@
                         async: false,
                         success: function (addBlogResponse) {
                             if (addBlogResponse["success"] === 1) {
+                                editor.clear(); // 清空
+                                editor.setMarkdown("# 请输入标题");
                                 swal({
                                         title: "提示信息",
                                         text: "恭喜您!博文已保存是否查看?",
                                         type: "success",
-                                        showCancelButton: true
+                                        showCancelButton: true,
+                                        cancelButtonText: "取消",
+                                        confirmButtonText: "确定"
                                     },
                                     function () {
+                                        // 打开查看文章的界面
+                                        window.location.href = "<%=request.getContextPath()%>/showBlog/id/" + addBlogResponse["data"]["blogId"];
                                     });
                             } else {
-                                swal({
-                                        title: "提示信息",
-                                        text: "好气啊!博文保存失败!",
-                                        type: "error",
-                                        showCancelButton: true
-                                    },
-                                    function () {
-                                    });
+                                swal("提示信息", "好气啊!博文保存失败!", "error");
                             }
                         },
                         error: function (errorMessage) {

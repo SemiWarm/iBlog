@@ -9,6 +9,7 @@ import cn.kpq.iBlog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,20 +68,21 @@ public class BlogServiceImpl implements BlogService {
         return result;
     }
 
-    public BlogDetail getBlogById(Blog blog) throws Exception {
+    public BlogDetail getBlogById(Serializable id) throws Exception {
 
         BlogDetail blogDetail = new BlogDetail();
 
-        Blog result = blogMapper.findById(blog.getBlogId());
+        Blog result = blogMapper.findById(id);
 
         blogDetail.setBlogId(result.getBlogId());
         blogDetail.setBlogTitle(result.getBlogTitle());
         blogDetail.setBlogContent(result.getBlogContent());
         blogDetail.setBlogThum(result.getBlogThum());
+        blogDetail.setWordCount(result.getWordCount());
         blogDetail.setCreateBy(result.getCreateBy());
         blogDetail.setCreateAt(result.getCreateAt());
         blogDetail.setStatus(result.getStatus());
-        blogDetail.setBlogInfo(blogInfoMapper.findById(blog.getBlogId()));
+        blogDetail.setBlogInfo(blogInfoMapper.findById(id));
 
         return blogDetail;
     }

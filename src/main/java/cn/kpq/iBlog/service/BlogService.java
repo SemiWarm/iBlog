@@ -3,6 +3,7 @@ package cn.kpq.iBlog.service;
 import cn.kpq.iBlog.entity.Blog;
 import cn.kpq.iBlog.entity.BlogDetail;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public interface BlogService {
 
     int updateBlog(BlogDetail blogDetail) throws Exception;
 
-    BlogDetail getBlogById(Blog blog) throws Exception;
+    BlogDetail getBlogById(Serializable id) throws Exception;
 
     List<BlogDetail> getAllBlogs() throws Exception;
 }
