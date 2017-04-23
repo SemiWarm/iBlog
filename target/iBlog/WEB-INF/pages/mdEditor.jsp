@@ -136,7 +136,7 @@
         // 不完全字数统计
         var regWords = /\b\w+\b|[\u4e00-\u9fa5]/g;
 
-        if (markdownText === '# 请输入标题') { // 没有填写任何信息
+        if (markdownText === '# 请输入标题' || markdownText === '') { // 没有填写任何信息
             sweetAlert("出错啦!", "请输入博文内容!", "error");
         } else {
             // 赋值操作
@@ -195,11 +195,18 @@
                                         type: "success",
                                         showCancelButton: true,
                                         cancelButtonText: "取消",
-                                        confirmButtonText: "确定"
+                                        confirmButtonText: "确定",
+                                        closeOnConfirm: false,
+                                        closeOnCancel: true
                                     },
-                                    function () {
-                                        // 打开查看文章的界面
-                                        window.location.href = "<%=request.getContextPath()%>/showBlog/id/" + addBlogResponse["data"]["blogId"];
+                                    function (isConfirm) {
+                                        if (isConfirm) {
+                                            // 打开查看文章的界面
+                                            window.location.href = "<%=request.getContextPath()%>/showBlog/id/" + addBlogResponse["data"]["blogId"];
+                                        } else {
+                                            editor.clear(); // 清空
+                                            editor.setMarkdown("# 请输入标题");
+                                        }
                                     });
                             } else {
                                 swal("提示信息", "好气啊!博文保存失败!", "error");

@@ -56,6 +56,7 @@ public class BloggerController {
         Long bloggerId = date.getTime();
         blogger.setBloggerId(bloggerId);
         blogger.setStatus(true);
+        blogger.setBloggerAvatar("http://localhost:8080/upload/images/avatar.jpg");
 
         int result = bloggerService.addBlogger(blogger);
 
