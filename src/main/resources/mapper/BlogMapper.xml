@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace是指明Mybatis扫描的目录，即cn.semiwarm.admin.mapper.xxxMapper -->
+<mapper namespace="cn.kpq.iBlog.mapper.BlogMapper">
+    <insert id="add" parameterType="cn.kpq.iBlog.entity.Blog">
+        INSERT INTO Blog (blog_id, blog_title, blog_content, blog_thum, word_count, create_by, create_at, status)
+        VALUES
+            (#{blogId}, #{blogTitle}, #{blogContent}, #{blogThum}, #{wordCount}, #{createBy}, #{createAt}, #{status});
+    </insert>
+    <delete id="delete" parameterType="cn.kpq.iBlog.entity.Blog">
+        DELETE FROM Blog
+        WHERE blog_id = #{blogId}
+    </delete>
+    <update id="update" parameterType="cn.kpq.iBlog.entity.Blog">
+        UPDATE Blog
+        SET blog_title   = #{blogTitle},
+            blog_content = #{blogContent},
+            blog_thum    = #{blogThum},
+            word_count   = #{wordCount},
+            status       = #{status}
+        WHERE blog_id = #{blogId};
+    </update>
+    <select id="findById" parameterType="cn.kpq.iBlog.entity.Blog" resultType="cn.kpq.iBlog.entity.Blog">
+        SELECT *
+        FROM Blog
+        WHERE status = TRUE AND blog_id = #{blogId}
+    </select>
+    <select id="findAll" resultType="cn.kpq.iBlog.entity.Blog">
+        SELECT *
+        FROM Blog
+    </select>
+</mapper>

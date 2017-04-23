@@ -80,12 +80,14 @@
             margin-bottom: -1px;
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;
+            text-align: center;
         }
 
         .form-signin input[type="password"] {
             margin-bottom: 10px;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
+            text-align: center;
         }
 
     </style>
@@ -101,7 +103,7 @@
                 <!-- 账号 -->
                 <label for="bloggerAccount" class="sr-only">Email address</label>
                 <input type="email" id="bloggerAccount" name="bloggerAccount" class="form-control" placeholder="邮箱"
-                       required>
+                       required autofocus>
                 <!-- 密码 -->
                 <label for="loginPassword" class="sr-only">Password</label>
                 <input type="password" id="loginPassword" name="loginPassword" class="form-control" placeholder="密码"

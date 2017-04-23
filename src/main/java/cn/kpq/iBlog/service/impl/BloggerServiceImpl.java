@@ -52,6 +52,7 @@ public class BloggerServiceImpl implements BloggerService {
             response.setData(null);
 
             session.setAttribute("bloggerName",result.getBloggerName());
+            session.setAttribute("bloggerId",result.getBloggerId());
 
         } else {
             response.setSuccess(0);

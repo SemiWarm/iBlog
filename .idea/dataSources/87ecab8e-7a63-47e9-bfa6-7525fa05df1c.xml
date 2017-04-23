@@ -13,227 +13,371 @@
     <table id="7" parent="2" name="Administrator">
       <Comment>管理员表</Comment>
     </table>
-    <table id="8" parent="2" name="Blogger">
+    <table id="8" parent="2" name="Blog">
+      <Comment>博文表</Comment>
+    </table>
+    <table id="9" parent="2" name="BlogInfo">
+      <Comment>博文信息表</Comment>
+    </table>
+    <table id="10" parent="2" name="Blogger">
       <Comment>博主表</Comment>
     </table>
-    <table id="9" parent="2" name="Image">
+    <table id="11" parent="2" name="Image">
       <Comment>图片表</Comment>
     </table>
-    <column id="10" parent="7" name="administrator_id">
+    <column id="12" parent="7" name="administrator_id">
       <Position>1</Position>
       <Comment>管理员ID</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="11" parent="7" name="administrator_name">
+    <column id="13" parent="7" name="administrator_name">
       <Position>2</Position>
       <Comment>管理员名称</Comment>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="12" parent="7" name="password">
+    <column id="14" parent="7" name="password">
       <Position>3</Position>
       <Comment>密码</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="7" name="privilege_level">
+    <column id="15" parent="7" name="privilege_level">
       <Position>4</Position>
       <Comment>权限等级</Comment>
       <DataType>tinyint(4)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <column id="14" parent="7" name="status">
+    <column id="16" parent="7" name="status">
       <Position>5</Position>
       <Comment>账号是否可用</Comment>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <column id="15" parent="7" name="create_at">
+    <column id="17" parent="7" name="create_at">
       <Position>6</Position>
       <Comment>管理员创建时间</Comment>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <index id="16" parent="7" name="administrator_id">
+    <index id="18" parent="7" name="administrator_id">
       <ColNames>administrator_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="17" parent="7" name="administrator_name">
+    <index id="19" parent="7" name="administrator_name">
       <ColNames>administrator_name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="18" parent="7" name="PRIMARY">
+    <key id="20" parent="7" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>administrator_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="19" parent="7" name="administrator_id">
+    <key id="21" parent="7" name="administrator_id">
       <ColNames>administrator_id</ColNames>
       <UnderlyingIndexName>administrator_id</UnderlyingIndexName>
     </key>
-    <key id="20" parent="7" name="administrator_name">
+    <key id="22" parent="7" name="administrator_name">
       <ColNames>administrator_name</ColNames>
       <UnderlyingIndexName>administrator_name</UnderlyingIndexName>
     </key>
-    <column id="21" parent="8" name="blogger_id">
+    <column id="23" parent="8" name="blog_id">
+      <Position>1</Position>
+      <Comment>博文ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="8" name="blog_title">
+      <Position>2</Position>
+      <Comment>博文标题</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="8" name="blog_content">
+      <Position>3</Position>
+      <Comment>博文内容</Comment>
+      <DataType>longtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="8" name="blog_thum">
+      <Position>4</Position>
+      <Comment>博文缩略图</Comment>
+      <DataType>varchar(200)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;http://localhost:8080/images/thum.png&apos;</DefaultExpression>
+    </column>
+    <column id="27" parent="8" name="word_count">
+      <Position>5</Position>
+      <Comment>博文字数</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="8" name="create_by">
+      <Position>6</Position>
+      <Comment>博主ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="8" name="create_at">
+      <Position>7</Position>
+      <Comment>创建时间</Comment>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="30" parent="8" name="status">
+      <Position>8</Position>
+      <Comment>博文状态</Comment>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <index id="31" parent="8" name="blog_id">
+      <ColNames>blog_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="32" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>blog_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="33" parent="8" name="blog_id">
+      <ColNames>blog_id</ColNames>
+      <UnderlyingIndexName>blog_id</UnderlyingIndexName>
+    </key>
+    <column id="34" parent="9" name="blog_id">
+      <Position>1</Position>
+      <Comment>博文ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="9" name="blog_group">
+      <Position>2</Position>
+      <Comment>博文所属分组</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="36" parent="9" name="blog_category">
+      <Position>3</Position>
+      <Comment>博文所属类目</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="37" parent="9" name="blog_topic">
+      <Position>4</Position>
+      <Comment>博文所属专题</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="38" parent="9" name="blog_tags">
+      <Position>5</Position>
+      <Comment>博文标签</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="39" parent="9" name="blog_hits">
+      <Position>6</Position>
+      <Comment>点击量</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="40" parent="9" name="blog_collections">
+      <Position>7</Position>
+      <Comment>收藏量</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="41" parent="9" name="blog_stars">
+      <Position>8</Position>
+      <Comment>喜欢量</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="42" parent="9" name="blog_comments">
+      <Position>9</Position>
+      <Comment>评论个数</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="43" parent="9" name="status">
+      <Position>10</Position>
+      <Comment>博文信息状态</Comment>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <index id="44" parent="9" name="blog_id">
+      <ColNames>blog_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="45" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>blog_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="46" parent="9" name="blog_id">
+      <ColNames>blog_id</ColNames>
+      <UnderlyingIndexName>blog_id</UnderlyingIndexName>
+    </key>
+    <column id="47" parent="10" name="blogger_id">
       <Position>1</Position>
       <Comment>博主ID</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="8" name="blogger_name">
+    <column id="48" parent="10" name="blogger_name">
       <Position>2</Position>
       <Comment>博主昵称</Comment>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="8" name="blogger_account">
+    <column id="49" parent="10" name="blogger_account">
       <Position>3</Position>
       <Comment>博主账号</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="8" name="login_password">
+    <column id="50" parent="10" name="login_password">
       <Position>4</Position>
       <Comment>登录密码</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="25" parent="8" name="blogger_profile">
+    <column id="51" parent="10" name="blogger_profile">
       <Position>5</Position>
       <Comment>博主简介</Comment>
       <DataType>tinytext|0</DataType>
     </column>
-    <column id="26" parent="8" name="blogger_avatar">
+    <column id="52" parent="10" name="blogger_avatar">
       <Position>6</Position>
       <Comment>博主头像</Comment>
       <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="27" parent="8" name="status">
+    <column id="53" parent="10" name="status">
       <Position>7</Position>
       <Comment>账号是否可用</Comment>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <column id="28" parent="8" name="create_at">
+    <column id="54" parent="10" name="create_at">
       <Position>8</Position>
       <Comment>账号创建时间</Comment>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <index id="29" parent="8" name="blogger_account">
+    <index id="55" parent="10" name="blogger_account">
       <ColNames>blogger_account</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="30" parent="8" name="blogger_id">
+    <index id="56" parent="10" name="blogger_id">
       <ColNames>blogger_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="31" parent="8" name="blogger_name">
+    <index id="57" parent="10" name="blogger_name">
       <ColNames>blogger_name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="32" parent="8" name="PRIMARY">
+    <key id="58" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>blogger_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="33" parent="8" name="blogger_id">
+    <key id="59" parent="10" name="blogger_id">
       <ColNames>blogger_id</ColNames>
       <UnderlyingIndexName>blogger_id</UnderlyingIndexName>
     </key>
-    <key id="34" parent="8" name="blogger_name">
+    <key id="60" parent="10" name="blogger_name">
       <ColNames>blogger_name</ColNames>
       <UnderlyingIndexName>blogger_name</UnderlyingIndexName>
     </key>
-    <key id="35" parent="8" name="blogger_account">
+    <key id="61" parent="10" name="blogger_account">
       <ColNames>blogger_account</ColNames>
       <UnderlyingIndexName>blogger_account</UnderlyingIndexName>
     </key>
-    <column id="36" parent="9" name="image_uuid">
+    <column id="62" parent="11" name="image_uuid">
       <Position>1</Position>
       <Comment>图片uuid</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="37" parent="9" name="image_original_name">
+    <column id="63" parent="11" name="image_original_name">
       <Position>2</Position>
       <Comment>图片原始名称</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="38" parent="9" name="image_name">
+    <column id="64" parent="11" name="image_name">
       <Position>3</Position>
       <Comment>图片存储名称</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="39" parent="9" name="image_extension_name">
+    <column id="65" parent="11" name="image_extension_name">
       <Position>4</Position>
       <Comment>图片扩展名</Comment>
       <DataType>varchar(5)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="40" parent="9" name="image_real_path">
+    <column id="66" parent="11" name="image_real_path">
       <Position>5</Position>
       <Comment>图片物理路径</Comment>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="41" parent="9" name="image_access_path">
+    <column id="67" parent="11" name="image_access_path">
       <Position>6</Position>
       <Comment>图片访问路径</Comment>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="42" parent="9" name="image_size">
+    <column id="68" parent="11" name="image_size">
       <Position>7</Position>
       <Comment>图片大小</Comment>
       <DataType>varchar(10)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="43" parent="9" name="image_type">
+    <column id="69" parent="11" name="image_type">
       <Position>8</Position>
       <Comment>图片类型</Comment>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="44" parent="9" name="uploaded_by">
+    <column id="70" parent="11" name="uploaded_by">
       <Position>9</Position>
       <Comment>上传人</Comment>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="45" parent="9" name="uploaded_at">
+    <column id="71" parent="11" name="uploaded_at">
       <Position>10</Position>
       <Comment>上传时间</Comment>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <column id="46" parent="9" name="status">
+    <column id="72" parent="11" name="status">
       <Position>11</Position>
       <Comment>图片是否可用</Comment>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <index id="47" parent="9" name="image_uuid">
+    <index id="73" parent="11" name="image_uuid">
       <ColNames>image_uuid</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="48" parent="9" name="PRIMARY">
+    <key id="74" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>image_uuid</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="49" parent="9" name="image_uuid">
+    <key id="75" parent="11" name="image_uuid">
       <ColNames>image_uuid</ColNames>
       <UnderlyingIndexName>image_uuid</UnderlyingIndexName>
     </key>

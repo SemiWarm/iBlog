@@ -218,7 +218,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <img class="img-thumbnail"
-                                         src="<%=request.getContextPath()%>/static/images/user.jpg">
+                                         src="<%=request.getContextPath()%>/static/images/thum.png">
                                 </div>
                             </div>
                             <div class="row">
@@ -266,7 +266,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <img class="img-thumbnail"
-                                         src="<%=request.getContextPath()%>/static/images/user.jpg">
+                                         src="<%=request.getContextPath()%>/static/images/thum.png">
                                 </div>
                             </div>
                             <div class="row">
@@ -314,7 +314,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <img class="img-thumbnail"
-                                         src="<%=request.getContextPath()%>/static/images/user.jpg">
+                                         src="<%=request.getContextPath()%>/static/images/thum.png">
                                 </div>
                             </div>
                             <div class="row">
@@ -363,7 +363,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <img class="img-thumbnail"
-                                         src="<%=request.getContextPath()%>/static/images/user.jpg">
+                                         src="<%=request.getContextPath()%>/static/images/thum.png">
                                 </div>
                             </div>
                             <div class="row">

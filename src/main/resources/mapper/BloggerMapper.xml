@@ -26,7 +26,7 @@
         WHERE blogger_id = #{bloggerId}
     </select>
 
-    <select id="findAll" parameterType="cn.kpq.iBlog.entity.Blogger" resultType="cn.kpq.iBlog.entity.Blogger">
+    <select id="findAll" resultType="cn.kpq.iBlog.entity.Blogger">
         SELECT *
         FROM Blogger
     </select>
