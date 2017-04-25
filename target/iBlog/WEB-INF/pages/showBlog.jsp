@@ -40,7 +40,7 @@
         <div class="container-fluid">
             <!-- 头部 -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="<%=request.getContextPath()%>/main">
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/">
                     <img alt="Brand" style="width: 32px;height: 18px"
                          src="<%=request.getContextPath()%>/static/images/iBlog.png">
                 </a>
@@ -49,7 +49,7 @@
             <!-- 右侧 -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="<%=request.getContextPath()%>/main">发现</a></li>
+                    <li><a href="<%=request.getContextPath()%>/">发现</a></li>
                     <li><a href="#">关注</a></li>
                 </ul>
 

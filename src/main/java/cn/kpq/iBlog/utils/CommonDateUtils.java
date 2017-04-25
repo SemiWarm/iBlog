@@ -17,7 +17,7 @@ public class CommonDateUtils {
      */
     public static String getFromatCurrentDate() {
         Date currentDate = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
         return format.format(currentDate);
     }
 

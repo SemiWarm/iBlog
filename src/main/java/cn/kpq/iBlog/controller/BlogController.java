@@ -7,6 +7,7 @@ import cn.kpq.iBlog.entity.Blogger;
 import cn.kpq.iBlog.service.impl.BlogServiceImpl;
 import cn.kpq.iBlog.service.impl.BloggerServiceImpl;
 import cn.kpq.iBlog.utils.CommonDateUtils;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,6 +65,12 @@ public class BlogController {
         }
 
         return response;
+    }
+
+    @RequestMapping(value = "/blogs/pageNum/{pageNum}/pageSize/{pageSize}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public PageInfo<BlogDetail> getAllBlogs(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
+        return blogService.getAllBlogs(pageNum,pageSize);
     }
 
     @RequestMapping(value = "/showBlog/id/{blogId}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")

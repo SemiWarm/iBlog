@@ -39,7 +39,7 @@
             <div class="container-fluid">
                 <!-- 头部 -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="<%=request.getContextPath()%>/main">
+                    <a class="navbar-brand" href="<%=request.getContextPath()%>/">
                         <img alt="Brand" style="width: 32px;height: 18px"
                              src="<%=request.getContextPath()%>/static/images/iBlog.png">
                     </a>
@@ -48,7 +48,7 @@
                 <!-- 右侧 -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="<%=request.getContextPath()%>/main">发现</a></li>
+                        <li><a href="<%=request.getContextPath()%>/">发现</a></li>
                         <li><a href="#">关注</a></li>
                     </ul>
 
@@ -148,7 +148,12 @@
             // 3.获取Html博文内容
             blogHtmlContent = editor.getHTML();
             // 4.获取内容的第一张图片作为缩略图
-            blogThum = markdownText.match(regImages)[0];
+            blogThum = markdownText.match(regImages);
+            if (blogThum !== null){
+                blogThum = markdownText.match(regImages)[0];
+            } else {
+                blogThum = "http://localhost:8080/images/thum.png";
+            }
             // 5.获取不完全字数统计
             wordCount = blogMarkdownContent.match(regWords).length;
 

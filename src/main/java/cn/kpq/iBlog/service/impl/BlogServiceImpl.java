@@ -5,7 +5,12 @@ import cn.kpq.iBlog.entity.BlogDetail;
 import cn.kpq.iBlog.entity.BlogInfo;
 import cn.kpq.iBlog.mapper.BlogInfoMapper;
 import cn.kpq.iBlog.mapper.BlogMapper;
+import cn.kpq.iBlog.mapper.BloggerMapper;
 import cn.kpq.iBlog.service.BlogService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +25,13 @@ import java.util.List;
 public class BlogServiceImpl implements BlogService {
 
     private final BlogMapper blogMapper;
+    private final BloggerMapper bloggerMapper;
     private final BlogInfoMapper blogInfoMapper;
 
     @Autowired
-    public BlogServiceImpl(BlogMapper blogMapper, BlogInfoMapper blogInfoMapper) {
+    public BlogServiceImpl(BlogMapper blogMapper, BloggerMapper bloggerMapper, BlogInfoMapper blogInfoMapper) {
         this.blogMapper = blogMapper;
+        this.bloggerMapper = bloggerMapper;
         this.blogInfoMapper = blogInfoMapper;
     }
 
@@ -88,18 +95,32 @@ public class BlogServiceImpl implements BlogService {
         return blogDetail;
     }
 
-    public List<BlogDetail> getAllBlogs() throws Exception {
-        List<BlogDetail> blogDetails = new ArrayList<BlogDetail>();
+    public PageInfo<BlogDetail> getAllBlogs(int pageNum, int pageSize) throws Exception {
 
+        PageHelper.startPage(pageNum, pageSize);
         List<Blog> blogs = blogMapper.findAll();
 
+        List<BlogDetail> blogDetails = new ArrayList<BlogDetail>();
         BlogDetail blogDetail;
         for (Blog blog : blogs) {
             blogDetail = new BlogDetail();
+            // 设置博主信息
+            blogDetail.setBlogger(bloggerMapper.findById(blog.getCreateBy()));
+            // 设置博文信息
             blogDetail.setBlogId(blog.getBlogId());
-            blogDetail.setBlogTitle(blog.getBlogTitle());
+
+            // 处理标题
+            int start = blog.getBlogTitle().indexOf(" ");
+            int end = blog.getBlogTitle().length();
+            String blogTitle = blog.getBlogTitle().substring(start, end);
+
+            blogDetail.setBlogTitle(blogTitle);
             blogDetail.setBlogMarkdownContent(blog.getBlogMarkdownContent());
-            blogDetail.setBlogHtmlContent(blog.getBlogHtmlContent());
+
+            // 处理html内容
+            String blogHtmlContent = Jsoup.clean(blog.getBlogHtmlContent(), new Whitelist());
+            blogDetail.setBlogHtmlContent(blogHtmlContent);
+
             blogDetail.setBlogThum(blog.getBlogThum());
             blogDetail.setCreateBy(blog.getCreateBy());
             blogDetail.setCreateAt(blog.getCreateAt());
@@ -109,6 +130,6 @@ public class BlogServiceImpl implements BlogService {
             blogDetails.add(blogDetail);
         }
 
-        return blogDetails;
+        return new PageInfo<BlogDetail>(blogDetails);
     }
 }

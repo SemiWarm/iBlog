@@ -2,9 +2,9 @@ package cn.kpq.iBlog.service;
 
 import cn.kpq.iBlog.entity.Blog;
 import cn.kpq.iBlog.entity.BlogDetail;
+import com.github.pagehelper.PageInfo;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by alibct on 2017/4/23.
@@ -18,5 +18,5 @@ public interface BlogService {
 
     BlogDetail getBlogById(Serializable id) throws Exception;
 
-    List<BlogDetail> getAllBlogs() throws Exception;
+    PageInfo<BlogDetail> getAllBlogs(int pageNum,int pageSize) throws Exception;
 }
