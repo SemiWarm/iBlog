@@ -76,7 +76,8 @@ public class BlogServiceImpl implements BlogService {
 
         blogDetail.setBlogId(result.getBlogId());
         blogDetail.setBlogTitle(result.getBlogTitle());
-        blogDetail.setBlogContent(result.getBlogContent());
+        blogDetail.setBlogMarkdownContent(result.getBlogMarkdownContent());
+        blogDetail.setBlogHtmlContent(result.getBlogHtmlContent());
         blogDetail.setBlogThum(result.getBlogThum());
         blogDetail.setWordCount(result.getWordCount());
         blogDetail.setCreateBy(result.getCreateBy());
@@ -97,7 +98,8 @@ public class BlogServiceImpl implements BlogService {
             blogDetail = new BlogDetail();
             blogDetail.setBlogId(blog.getBlogId());
             blogDetail.setBlogTitle(blog.getBlogTitle());
-            blogDetail.setBlogContent(blog.getBlogContent());
+            blogDetail.setBlogMarkdownContent(blog.getBlogMarkdownContent());
+            blogDetail.setBlogHtmlContent(blog.getBlogHtmlContent());
             blogDetail.setBlogThum(blog.getBlogThum());
             blogDetail.setCreateBy(blog.getCreateBy());
             blogDetail.setCreateAt(blog.getCreateAt());

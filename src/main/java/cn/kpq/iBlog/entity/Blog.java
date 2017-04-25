@@ -11,7 +11,8 @@ public class Blog implements Serializable {
 
     private Long blogId; // 博文ID
     private String blogTitle; // 博文标题
-    private String blogContent; // 博文内容
+    private String blogMarkdownContent; // 博文Markdown内容
+    private String blogHtmlContent; // 博文Html内容
     private String blogThum; // 博文缩略图
     private Long wordCount; // 博文字数
     private Long createBy; // 作者Id
@@ -34,12 +35,20 @@ public class Blog implements Serializable {
         this.blogTitle = blogTitle;
     }
 
-    public String getBlogContent() {
-        return blogContent;
+    public String getBlogMarkdownContent() {
+        return blogMarkdownContent;
     }
 
-    public void setBlogContent(String blogContent) {
-        this.blogContent = blogContent;
+    public void setBlogMarkdownContent(String blogMarkdownContent) {
+        this.blogMarkdownContent = blogMarkdownContent;
+    }
+
+    public String getBlogHtmlContent() {
+        return blogHtmlContent;
+    }
+
+    public void setBlogHtmlContent(String blogHtmlContent) {
+        this.blogHtmlContent = blogHtmlContent;
     }
 
     public String getBlogThum() {
@@ -87,7 +96,8 @@ public class Blog implements Serializable {
         return "Blog{" +
                 "blogId=" + blogId +
                 ", blogTitle='" + blogTitle + '\'' +
-                ", blogContent='" + blogContent + '\'' +
+                ", blogMarkdownContent='" + blogMarkdownContent + '\'' +
+                ", blogHtmlContent='" + blogHtmlContent + '\'' +
                 ", blogThum='" + blogThum + '\'' +
                 ", wordCount=" + wordCount +
                 ", createBy=" + createBy +

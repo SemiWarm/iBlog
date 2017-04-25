@@ -17,6 +17,16 @@ public class MainController {
         return new ModelAndView("forward:index");
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView login() throws Exception {
+        return new ModelAndView("login");
+    }
+
+    @RequestMapping(value = "/quit", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView quit() throws Exception {
+        return new ModelAndView("quit");
+    }
+
     @RequestMapping(value = "/signUp", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public ModelAndView signUp() throws Exception {
         return new ModelAndView("signUp");
@@ -25,12 +35,6 @@ public class MainController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public ModelAndView admin() throws Exception {
         return new ModelAndView("admin");
-    }
-
-
-    @RequestMapping(value = "/main", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public ModelAndView main() throws Exception {
-        return new ModelAndView("main");
     }
 
     @RequestMapping(value = "/blogger", method = RequestMethod.GET, produces = "application/json;charset=utf-8")

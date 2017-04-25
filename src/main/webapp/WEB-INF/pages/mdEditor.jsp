@@ -97,7 +97,8 @@
 <script type="text/javascript">
 
     var blogTitle;
-    var blogContent;
+    var blogMarkdownContent;
+    var blogHtmlContent;
     var blogThum;
     var wordCount;
     var createBy;
@@ -142,12 +143,14 @@
             // 赋值操作
             // 1.获取标题
             blogTitle = markdownText.split('\n')[0];
-            // 2.获取博文内容
-            blogContent = markdownText.substring(blogTitle.length, markdownText.length);
-            // 3.获取内容的第一张图片作为缩略图
+            // 2.获取Markdown博文内容
+            blogMarkdownContent = markdownText.substring(blogTitle.length, markdownText.length);
+            // 3.获取Html博文内容
+            blogHtmlContent = editor.getHTML();
+            // 4.获取内容的第一张图片作为缩略图
             blogThum = markdownText.match(regImages)[0];
-            // 4.获取不完全字数统计
-            wordCount = markdownText.match(regWords).length;
+            // 5.获取不完全字数统计
+            wordCount = blogMarkdownContent.match(regWords).length;
 
             doAddBlog();
         }
@@ -178,7 +181,8 @@
                         // 请求数据，用户名和密码
                         data: {
                             'blogTitle': blogTitle,
-                            'blogContent': blogContent,
+                            'blogMarkdownContent': blogMarkdownContent,
+                            'blogHtmlContent': blogHtmlContent,
                             'blogThum': blogThum,
                             'wordCount': wordCount,
                             'createBy': createBy

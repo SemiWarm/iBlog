@@ -117,7 +117,7 @@
     <!-- content -->
     <div>
         <div class="col-lg-8 col-lg-offset-2" id="content">
-                <textarea style="display:none;">${blogDetail.blogContent}</textarea>
+                <textarea style="display:none;">${blogDetail.blogMarkdownContent}</textarea>
         </div>
     </div>
 </div>

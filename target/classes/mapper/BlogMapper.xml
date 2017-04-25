@@ -3,9 +3,9 @@
 <!-- namespace是指明Mybatis扫描的目录，即cn.semiwarm.admin.mapper.xxxMapper -->
 <mapper namespace="cn.kpq.iBlog.mapper.BlogMapper">
     <insert id="add" parameterType="cn.kpq.iBlog.entity.Blog">
-        INSERT INTO Blog (blog_id, blog_title, blog_content, blog_thum, word_count, create_by, create_at, status)
+        INSERT INTO Blog (blog_id, blog_title, blog_markdown_content, blog_html_content, blog_thum, word_count, create_by, create_at, status)
         VALUES
-            (#{blogId}, #{blogTitle}, #{blogContent}, #{blogThum}, #{wordCount}, #{createBy}, #{createAt}, #{status});
+            (#{blogId}, #{blogTitle}, #{blogMarkdownContent}, #{blogHtmlContent},#{blogThum}, #{wordCount}, #{createBy}, #{createAt}, #{status});
     </insert>
     <delete id="delete" parameterType="cn.kpq.iBlog.entity.Blog">
         DELETE FROM Blog
@@ -14,7 +14,8 @@
     <update id="update" parameterType="cn.kpq.iBlog.entity.Blog">
         UPDATE Blog
         SET blog_title   = #{blogTitle},
-            blog_content = #{blogContent},
+            blog_markdown_content = #{blogMarkdownContent},
+            blog_html_content = #{blogHtmlContent},
             blog_thum    = #{blogThum},
             word_count   = #{wordCount},
             status       = #{status}
