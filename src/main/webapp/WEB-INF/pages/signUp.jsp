@@ -200,23 +200,28 @@
 
     var checkInput = function () {
         var resultInfo = "";
+
         if (IsNull(replaceHTML(bloggerAccount.val()))) {
             resultInfo += "请输入登录账号!\n";
         } else {
             var regEmail = /^[a-zA-Z0-9]+\@iBlog\.(com|net|cn)$/;
             if (!regEmail.test(bloggerAccount.val())) {
-                resultInfo += "请输入符合条件的邮箱!例如:xxx@iBlog.com";
+                resultInfo += "请输入符合条件的邮箱!例如:xxx@iBlog.com/net/cn";
             }
         }
+
         if (IsNull(replaceHTML(bloggerName.val()))) {
             resultInfo += "请输入博主昵称!\n";
         }
+
         if (IsNull(replaceHTML(loginPassword.val()))) {
             resultInfo += "请输入登录密码!\n";
         }
+
         if (IsNull(replaceHTML(confirmLoginPassword.val()))) {
             resultInfo += "请确认登录密码!\n";
         }
+
         return resultInfo;
     };
 

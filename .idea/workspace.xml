@@ -2,28 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93290abb-3f86-471f-8383-d2a3115b5bed" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/date_fns.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/imgLiquid-min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BlogDetailMapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogDetailService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BlogDetailServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mapper/BlogDetailMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/BlogDetailMapperTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/controller/BlogController.class" afterPath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/controller/BlogController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/entity/BlogDetail.class" afterPath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/entity/BlogDetail.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/service/BlogService.class" afterPath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/service/BlogService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/service/impl/BlogServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/service/impl/BlogServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/utils/CommonDateUtils.class" afterPath="$PROJECT_DIR$/target/classes/cn/kpq/iBlog/utils/CommonDateUtils.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/iBlog.war" afterPath="$PROJECT_DIR$/target/iBlog.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/controller/BlogController.class" afterPath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/controller/BlogController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/entity/BlogDetail.class" afterPath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/entity/BlogDetail.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/service/BlogService.class" afterPath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/service/BlogService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/service/impl/BlogServiceImpl.class" afterPath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/service/impl/BlogServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/utils/CommonDateUtils.class" afterPath="$PROJECT_DIR$/target/iBlog/WEB-INF/classes/cn/kpq/iBlog/utils/CommonDateUtils.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BlogController.java" afterPath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BlogController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/BlogDetail.java" afterPath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/BlogDetail.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogService.java" afterPath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BlogServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BlogServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/utils/CommonDateUtils.java" afterPath="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/utils/CommonDateUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/mdEditor.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/mdEditor.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/showBlog.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/showBlog.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/signUp.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/signUp.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/iBlog/WEB-INF/pages/signUp.jsp" afterPath="$PROJECT_DIR$/target/iBlog/WEB-INF/pages/signUp.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/iBlog/index.jsp" afterPath="$PROJECT_DIR$/target/iBlog/index.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -124,20 +125,32 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="BlogController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BlogController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-493">
+              <caret line="31" column="58" lean-forward="true" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Jsp File" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Jsp File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>jumbotronContent</find>
+      <find>btnSignUp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -151,11 +164,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/spring/spring-mvc.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/spring/spring-transaction.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/static/js/editormd.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/admin.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/blogEdit.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/Blogger.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BaseMapper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/BaseMapper.xml" />
@@ -182,9 +190,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/mapper/BlogInfoMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BloggerServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/signIn.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/signUp.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BloggerController.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/87ecab8e-7a63-47e9-bfa6-7525fa05df1c/console.sql" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/main.jsp" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -194,13 +200,20 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/login.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/MainController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/quit.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BlogController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/BlogDetail.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/utils/CommonDateUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/showBlog.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BlogServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/mdEditor.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/signUp.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/BlogDetail.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogDetailService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/BlogDetailMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BlogDetailMapper.java" />
+        <option value="$PROJECT_DIR$/src/test/java/BlogDetailMapperTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BlogController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BlogServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BlogDetailServiceImpl.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/87ecab8e-7a63-47e9-bfa6-7525fa05df1c/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/showBlog.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
       </list>
     </option>
@@ -282,9 +295,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -407,11 +418,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -433,63 +440,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iBlog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iBlog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iBlog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="iBlog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="mapper" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -516,10 +471,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="iBlog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -612,6 +563,10 @@
               <option name="myItemId" value="iBlog" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mapper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -675,6 +630,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -693,10 +650,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/mapper" />
       <recent name="$PROJECT_DIR$/src/main/webapp/static/js" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages" />
       <recent name="$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/utils" />
-      <recent name="$PROJECT_DIR$/src/main/resources/mapper" />
       <recent name="$PROJECT_DIR$/src/main/webapp/static/images" />
     </key>
   </component>
@@ -721,6 +678,48 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="BloggerMapperTest" />
       <option name="METHOD_NAME" value="testAdd" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="BlogDetailMapperTest.testFindAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="iBlog" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BlogDetailMapperTest" />
+      <option name="METHOD_NAME" value="testFindAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="BlogDetailMapperTest.testFindById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="iBlog" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BlogDetailMapperTest" />
+      <option name="METHOD_NAME" value="testFindById" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1204,13 +1203,17 @@
         </option>
       </method>
     </configuration>
-    <list size="2">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Tomcat Server.iBlog" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.BloggerMapperTest.testAdd" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.BlogDetailMapperTest.testFindAll" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.BlogDetailMapperTest.testFindById" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.BloggerMapperTest.testAdd" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.BlogDetailMapperTest.testFindById" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.BlogDetailMapperTest.testFindAll" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.BloggerMapperTest.testAdd" />
       </list>
     </recent_temporary>
   </component>
@@ -1238,6 +1241,8 @@
       <workItem from="1492956048788" duration="1384000" />
       <workItem from="1493040886522" duration="587000" />
       <workItem from="1493098354614" duration="22308000" />
+      <workItem from="1493877378035" duration="8853000" />
+      <workItem from="1493963002911" duration="11226000" />
     </task>
     <task id="LOCAL-00001" summary="添加了图片预览功能">
       <created>1492841376599</created>
@@ -1250,18 +1255,43 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BloggerMapperTest_testAdd - 2017.04.22 at 13h 34m 14s.xml">
-      <configuration name="BloggerMapperTest.testAdd" configurationId="JUnit" />
+    <history-entry file="BlogDetailMapperTest_testFindAll - 2017.05.04 at 15h 15m 22s.xml">
+      <configuration name="BlogDetailMapperTest.testFindAll" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BloggerMapperTest_testAdd - 2017.04.22 at 13h 35m 59s.xml">
-      <configuration name="BloggerMapperTest.testAdd" configurationId="JUnit" />
+    <history-entry file="BlogDetailMapperTest_testFindAll - 2017.05.04 at 15h 18m 10s.xml">
+      <configuration name="BlogDetailMapperTest.testFindAll" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BlogDetailMapperTest_testFindAll - 2017.05.04 at 15h 37m 41s.xml">
+      <configuration name="BlogDetailMapperTest.testFindAll" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BlogDetailMapperTest_testFindAll - 2017.05.04 at 16h 15m 00s.xml">
+      <configuration name="BlogDetailMapperTest.testFindAll" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BlogDetailMapperTest_testFindById - 2017.05.05 at 14h 56m 33s.xml">
+      <configuration name="BlogDetailMapperTest.testFindById" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BlogDetailMapperTest_testFindById - 2017.05.05 at 14h 59m 10s.xml">
+      <configuration name="BlogDetailMapperTest.testFindById" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BlogDetailMapperTest_testFindById - 2017.05.05 at 14h 59m 42s.xml">
+      <configuration name="BlogDetailMapperTest.testFindById" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BlogDetailMapperTest_testFindById - 2017.05.05 at 15h 09m 37s.xml">
+      <configuration name="BlogDetailMapperTest.testFindById" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BlogDetailMapperTest_testFindById - 2017.05.05 at 15h 10m 08s.xml">
+      <configuration name="BlogDetailMapperTest.testFindById" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BlogDetailMapperTest_testFindById - 2017.05.05 at 15h 32m 19s.xml">
+      <configuration name="BlogDetailMapperTest.testFindById" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90784000" />
+    <option name="totallyTimeSpent" value="110863000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1283,12 +1313,12 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6226138" sideWeight="0.49676898" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6226138" sideWeight="0.49676898" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32148626" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5859031" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34975767" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1345,62 +1375,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/BaseMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="51" lean-forward="true" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BloggerMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/ImageMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/ImageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/UploadImageResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/utils/CommonFileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-mvc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="55" column="8" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/ImageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="48" lean-forward="false" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/Image.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -1425,13 +1399,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="626">
           <caret line="47" column="22" lean-forward="true" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/BlogInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="102" column="18" lean-forward="false" selection-start-line="102" selection-start-column="18" selection-end-line="102" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1465,42 +1432,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/BlogInfoMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-          <folding>
-            <marker date="1492916377000" expanded="true" signature="349:398" ph="INSERT INTO BlogInfo... " />
-            <marker date="1492916377000" expanded="true" signature="491:545" ph="DELETE FROM " />
-            <marker date="1492916377000" expanded="true" signature="638:1078" ph="update BlogI... " />
-            <marker date="1492916377000" expanded="true" signature="638:1098" ph="UPDATE BlogI... " />
-            <marker date="1492916377000" expanded="true" signature="1235:1317" ph="SELECT * FRO... BlogInfo" />
-            <marker date="1492916377000" expanded="true" signature="1408:1438" ph="SELECT * FRO... BlogInfo" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BlogInfoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BloggerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="88" lean-forward="false" selection-start-line="23" selection-start-column="88" selection-end-line="23" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/Blogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="33" lean-forward="true" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/marked.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1530,16 +1461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BloggerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="58" column="83" lean-forward="true" selection-start-line="58" selection-start-column="83" selection-end-line="58" selection-end-column="83" />
-          <folding>
-            <element signature="e#1565#1574#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1830">
@@ -1548,44 +1469,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="172" column="21" lean-forward="false" selection-start-line="172" selection-start-column="21" selection-end-line="172" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/BlogMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="51" lean-forward="true" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
-          <folding>
-            <marker date="1493101926000" expanded="true" signature="341:634" ph="INSERT INTO Blog... " />
-            <marker date="1493101926000" expanded="true" signature="724:774" ph="DELETE FROM " />
-            <marker date="1493101926000" expanded="true" signature="863:1179" ph="UPDATE Blog " />
-            <marker date="1493101926000" expanded="true" signature="1309:1387" ph="SELECT * FRO... Blog" />
-            <marker date="1493101926000" expanded="true" signature="1474:1500" ph="SELECT * FRO... Blog" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BlogMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/main.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/main.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/quit.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1626,42 +1510,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BlogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="80" column="64" lean-forward="true" selection-start-line="80" selection-start-column="64" selection-end-line="80" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/imgLiquid-min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/Blog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="715">
-          <caret line="94" column="18" lean-forward="false" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/signUp.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2760">
-          <caret line="184" column="84" lean-forward="true" selection-start-line="184" selection-start-column="84" selection-end-line="184" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/showBlog.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-657">
-          <caret line="51" column="76" lean-forward="true" selection-start-line="51" selection-start-column="76" selection-end-line="51" selection-end-column="76" />
           <folding />
         </state>
       </provider>
@@ -1682,42 +1534,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/blogEdit.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-58">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/admin.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="14" column="93" lean-forward="false" selection-start-line="14" selection-start-column="93" selection-end-line="14" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="20" column="80" lean-forward="false" selection-start-line="20" selection-start-column="80" selection-end-line="20" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/BlogDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/87ecab8e-7a63-47e9-bfa6-7525fa05df1c/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="35" lean-forward="true" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1727,40 +1547,258 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/mdEditor.jsp">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="152" column="60" lean-forward="false" selection-start-line="152" selection-start-column="60" selection-end-line="152" selection-end-column="60" />
+        <state relative-caret-position="349">
+          <caret line="107" column="44" lean-forward="true" selection-start-line="107" selection-start-column="44" selection-end-line="107" selection-end-column="44" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BloggerMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BlogMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BloggerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="50" column="23" lean-forward="false" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/signUp.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9">
+          <caret line="142" column="58" lean-forward="true" selection-start-line="142" selection-start-column="58" selection-end-line="142" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/Blogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-208">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/BloggerMapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="15" column="54" lean-forward="true" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BloggerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" column="88" lean-forward="false" selection-start-line="23" selection-start-column="88" selection-end-line="23" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/ImageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="46" lean-forward="true" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/blogEdit.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/Blog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/BlogDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/BlogDetailMapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <element signature="e#710#711#0" expanded="false" />
+            <element signature="e#787#788#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BlogDetailMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="11" column="66" lean-forward="true" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/BlogDetailMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="101" lean-forward="true" selection-start-line="5" selection-start-column="101" selection-end-line="5" selection-end-column="101" />
+          <folding>
+            <marker date="1493968167000" expanded="true" signature="387:584" ph="SELECT * FRO... Blog" />
+            <marker date="1493968167000" expanded="true" signature="678:832" ph="SELECT * FRO... Blog" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/BlogMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+          <folding>
+            <marker date="1493101926000" expanded="true" signature="341:634" ph="INSERT INTO Blog... " />
+            <marker date="1493101926000" expanded="true" signature="724:774" ph="DELETE FROM " />
+            <marker date="1493101926000" expanded="true" signature="863:1179" ph="UPDATE Blog " />
+            <marker date="1493101926000" expanded="true" signature="1309:1387" ph="SELECT * FRO... Blog" />
+            <marker date="1493101926000" expanded="true" signature="1474:1500" ph="SELECT * FRO... Blog" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/mapper/BlogInfoMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/entity/BlogInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/BlogInfoMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+          <folding>
+            <marker date="1492916377000" expanded="true" signature="349:398" ph="INSERT INTO BlogInfo... " />
+            <marker date="1492916377000" expanded="true" signature="491:545" ph="DELETE FROM " />
+            <marker date="1492916377000" expanded="true" signature="638:1078" ph="update BlogI... " />
+            <marker date="1492916377000" expanded="true" signature="638:1098" ph="UPDATE BlogI... " />
+            <marker date="1492916377000" expanded="true" signature="1235:1317" ph="SELECT * FRO... BlogInfo" />
+            <marker date="1492916377000" expanded="true" signature="1408:1438" ph="SELECT * FRO... BlogInfo" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BlogServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="99" column="48" lean-forward="true" selection-start-line="99" selection-start-column="48" selection-end-line="99" selection-end-column="48" />
+        <state relative-caret-position="359">
+          <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/BlogDetailService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="13" column="75" lean-forward="true" selection-start-line="13" selection-start-column="75" selection-end-line="13" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/service/impl/BlogDetailServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="31" column="49" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/87ecab8e-7a63-47e9-bfa6-7525fa05df1c/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/mdEditor.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="213" column="111" lean-forward="true" selection-start-line="213" selection-start-column="67" selection-end-line="213" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/showBlog.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1318">
+          <caret line="138" column="70" lean-forward="false" selection-start-line="138" selection-start-column="70" selection-end-line="138" selection-end-column="70" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="244" column="76" lean-forward="true" selection-start-line="244" selection-start-column="76" selection-end-line="244" selection-end-column="76" />
+        <state relative-caret-position="632">
+          <caret line="385" column="63" lean-forward="false" selection-start-line="385" selection-start-column="63" selection-end-line="385" selection-end-column="63" />
           <folding>
-            <marker date="1493131582000" expanded="true" signature="12790:12815" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="13055:13072" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="13703:13729" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="14074:14092" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="14197:14215" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="14334:14352" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="16860:16885" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="17125:17142" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="17773:17799" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="18144:18162" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="18267:18285" ph="..." />
-            <marker date="1493131582000" expanded="true" signature="18404:18422" ph="..." />
+            <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <marker date="1493974988000" expanded="true" signature="12821:12846" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="13086:13103" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="13836:13862" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="14309:14327" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="14501:14519" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="14671:14689" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="17283:17308" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="17548:17565" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="18298:18324" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="18771:18789" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="18963:18981" ph="..." />
+            <marker date="1493974988000" expanded="true" signature="19133:19151" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/kpq/iBlog/controller/BlogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-493">
+          <caret line="31" column="58" lean-forward="true" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>

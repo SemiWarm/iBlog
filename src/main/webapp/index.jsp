@@ -1,4 +1,4 @@
-<%@ page import="cn.kpq.iBlog.utils.CommonDateUtils" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: alibct
   Date: 2017/4/21
@@ -256,16 +256,18 @@
                 var blogDetailHtml = "";
                 $.each(blogsPageInfo["list"], function (i, blogDetail) {
                     // 取信息
-                    var bloggerAvatar = blogDetail["blogger"]["bloggerAvatar"];
-                    var bloggerName = blogDetail["blogger"]["bloggerName"];
+                    var blogId = blogDetail["blogId"];
+                    var bloggerAvatar = blogDetail["bloggerAvatar"];
+                    var bloggerName = blogDetail["bloggerName"];
                     var createAt = dateFns.format(new Date(blogDetail["createAt"]), "YYYY.MM.DD HH:mm:ss");
                     var blogTitle = blogDetail["blogTitle"];
                     var blogHtmlContent = blogDetail["blogHtmlContent"];
                     var regImageUrl = /(http|https):.*\.(png|jpeg|jpg|gif)/g;
                     var blogThum = blogDetail["blogThum"].match(regImageUrl)[0];
-                    var blogHits = blogDetail["blogInfo"]["blogHits"];
-                    var blogCollections = blogDetail["blogInfo"]["blogCollections"];
-                    var blogComments = blogDetail["blogInfo"]["blogComments"];
+                    var blogHits = blogDetail["blogHits"];
+                    var blogCollections = blogDetail["blogCollections"];
+                    var blogComments = blogDetail["blogComments"];
+                    var blogUrl = "<%=request.getContextPath()%>/showBlog/id/" + blogId;
                     blogDetailHtml +=
                         "<div class='row'>" +
                         "<hr>" +
@@ -283,17 +285,23 @@
                         "<div class='bs-callout'>" +
                         "<div class='row'>" +
                         "<div class='col-lg-9'>" +
+                        "<a href='"+ blogUrl +"' target='_blank'>" +
                         "<h4 class='titleContent'>" + blogTitle + "</h4>" +
+                        "</a>" +
                         "<p class='iBlogContent'>" + blogHtmlContent + "</p>" +
                         "</div>" +
                         "<div class='col-lg-3 imgLiquidFill imgLiquid' style='width: 190px;height: 160px'>" +
+                        "<a href='"+ blogUrl +"' target='_blank'>" +
                         "<img class='img-thumbnail' src='" + blogThum + "'>" +
+                        "</a>" +
                         "</div>" +
                         "</div>" +
                         "<div class='row'>" +
                         "<div class='col-lg-12'>" +
                         "<label class='label label-danger'>@程序员 @散文 @热点</label><span style='padding-left: 10px'></span>" +
+                        "<a href='"+ blogUrl +"' target='_blank'>" +
                         "<i class='fa fa-eye text-muted'>  " + blogHits + "</i><span style='padding-left: 10px'></span>" +
+                        "</a>" +
                         "<i class='fa fa-bookmark-o text-muted'>  " + blogCollections + "</i><span style='padding-left: 10px'></span>" +
                         "<i class='fa fa-commenting-o text-muted'>  " + blogComments + "</i>" +
                         "</div>" +
@@ -332,16 +340,18 @@
                 var blogDetailHtml = "";
                 $.each(blogsPageInfo["list"], function (i, blogDetail) {
                     // 取信息
-                    var bloggerAvatar = blogDetail["blogger"]["bloggerAvatar"];
-                    var bloggerName = blogDetail["blogger"]["bloggerName"];
+                    var blogId = blogDetail["blogId"];
+                    var bloggerAvatar = blogDetail["bloggerAvatar"];
+                    var bloggerName = blogDetail["bloggerName"];
                     var createAt = dateFns.format(new Date(blogDetail["createAt"]), "YYYY.MM.DD HH:mm:ss");
                     var blogTitle = blogDetail["blogTitle"];
                     var blogHtmlContent = blogDetail["blogHtmlContent"];
                     var regImageUrl = /(http|https):.*\.(png|jpeg|jpg|gif)/g;
                     var blogThum = blogDetail["blogThum"].match(regImageUrl)[0];
-                    var blogHits = blogDetail["blogInfo"]["blogHits"];
-                    var blogCollections = blogDetail["blogInfo"]["blogCollections"];
-                    var blogComments = blogDetail["blogInfo"]["blogComments"];
+                    var blogHits = blogDetail["blogHits"];
+                    var blogCollections = blogDetail["blogCollections"];
+                    var blogComments = blogDetail["blogComments"];
+                    var blogUrl = "<%=request.getContextPath()%>/showBlog/id/" + blogId;
                     blogDetailHtml +=
                         "<div class='row'>" +
                         "<hr>" +
@@ -359,17 +369,23 @@
                         "<div class='bs-callout'>" +
                         "<div class='row'>" +
                         "<div class='col-lg-9'>" +
+                        "<a href='"+ blogUrl +"' target='_blank'>" +
                         "<h4 class='titleContent'>" + blogTitle + "</h4>" +
+                        "</a>" +
                         "<p class='iBlogContent'>" + blogHtmlContent + "</p>" +
                         "</div>" +
                         "<div class='col-lg-3 imgLiquidFill imgLiquid' style='width: 190px;height: 160px'>" +
+                        "<a href='"+ blogUrl +"' target='_blank'>" +
                         "<img class='img-thumbnail' src='" + blogThum + "'>" +
+                        "</a>" +
                         "</div>" +
                         "</div>" +
                         "<div class='row'>" +
                         "<div class='col-lg-12'>" +
                         "<label class='label label-danger'>@程序员 @散文 @热点</label><span style='padding-left: 10px'></span>" +
+                        "<a href='"+ blogUrl +"' target='_blank'>" +
                         "<i class='fa fa-eye text-muted'>  " + blogHits + "</i><span style='padding-left: 10px'></span>" +
+                        "</a>" +
                         "<i class='fa fa-bookmark-o text-muted'>  " + blogCollections + "</i><span style='padding-left: 10px'></span>" +
                         "<i class='fa fa-commenting-o text-muted'>  " + blogComments + "</i>" +
                         "</div>" +
@@ -379,7 +395,7 @@
                         "</div>" +
                         "</div>";
                 });
-                iBlogContainer.html(blogDetailHtml);
+                iBlogContainer.append(blogDetailHtml);
                 // 初始化图片加载
                 $(".imgLiquidFill").imgLiquid({
                     fill: true
@@ -401,7 +417,7 @@
                     showCancelButton: true,
                     cancelButtonText: "取消",
                     confirmButtonText: "确定",
-                    closeOnConfirm: true,
+                    closeOnConfirm: true
                 },
                 function () {
                     window.location.href = "<%=request.getContextPath()%>/login";

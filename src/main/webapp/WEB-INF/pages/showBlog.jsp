@@ -8,20 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String bloggerName = (String) session.getAttribute("bloggerName");
-    if (null == bloggerName || bloggerName.length() <= 0) {
-        response.sendRedirect(request.getContextPath() + "/");
-    }
 %>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>${title}</title>
+    <title>${blogDetail.blogTitle}</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/editormd.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/docs.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/sweetalert.css">
     <style>
         body {
             padding-top: 70px;
@@ -34,6 +32,7 @@
     </style>
 </head>
 <body>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <!-- 实现内补充 -->
@@ -49,24 +48,30 @@
             <!-- 右侧 -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="<%=request.getContextPath()%>/">发现</a></li>
+                    <li class="active"><a href="<%=request.getContextPath()%>/">发现</a></li>
                     <li><a href="#">关注</a></li>
                 </ul>
 
                 <div class="navbar-right">
-                    <ul class="nav navbar-nav">
+                    <a href="<%=request.getContextPath()%>/login" class="btn btn-success navbar-btn"
+                       id="btnLogin"><i
+                            class="fa fa-user"></i>&nbsp;&nbsp;登录
+                    </a>
+                    <ul id="dropdownMenu" class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">
                                 <%=bloggerName%>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a>
+                                </li>
                                 <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;收藏的文章</a>
                                 </li>
                                 <li><a href="#"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;喜欢的文章</a>
                                 </li>
-                                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;退出</a></li>
+                                <li><a href="<%=request.getContextPath()%>/quit"><span
+                                        class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;退出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -81,13 +86,12 @@
     </div>
 </nav>
 
-
 <!-- 内容区域 -->
 <div class="container">
     <!-- title -->
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
-            <h2>${title}</h2>
+            <h2>${blogDetail.blogTitle}</h2>
         </div>
     </div>
     <!-- userInfo -->
@@ -108,16 +112,16 @@
             <div class="row" style="padding-top: 8px">
                 <span class="text-muted">${createAt} |</span>
                 <span class="text-muted">字数 ${blogDetail.wordCount} |</span>
-                <span class="text-muted">阅读 ${blogDetail.blogInfo.blogHits} |</span>
-                <span class="text-muted">评论 ${blogDetail.blogInfo.blogComments} |</span>
-                <span class="text-muted">喜欢 ${blogDetail.blogInfo.blogStars}</span>
+                <span class="text-muted">阅读 ${blogDetail.blogHits} |</span>
+                <span class="text-muted">评论 ${blogDetail.blogComments} |</span>
+                <span class="text-muted">喜欢 ${blogDetail.blogStars}</span>
             </div>
         </div>
     </div>
     <!-- content -->
     <div>
         <div class="col-lg-8 col-lg-offset-2" id="content">
-                <textarea style="display:none;">${blogDetail.blogMarkdownContent}</textarea>
+            <textarea style="display:none;">${blogDetail.blogMarkdownContent}</textarea>
         </div>
     </div>
 </div>
@@ -132,20 +136,45 @@
 <script src="<%=request.getContextPath()%>/static/js/flowchart.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/jquery.flowchart.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/editormd.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/sweetalert.min.js"></script>
 <script type="text/javascript">
+    var btnLogin = $('#btnLogin');
+    var dropdownMenu = $('#dropdownMenu');
     var btnWriteBlog = $('#btnWriteBlog');
     $(function () {
+        var bloggerName = '<%=bloggerName%>';
+        if (bloggerName === 'null') {
+            dropdownMenu.css("display", "none");
+        } else {
+            btnLogin.css("display", "none");
+        }
         var content = editormd.markdownToHTML("content", {
-            htmlDecode      : "style,script,iframe",  // you can filter tags decode
-            emoji           : true,
-            taskList        : true,
-            tex             : true,  // 默认不解析
-            flowChart       : true,  // 默认不解析
-            sequenceDiagram : true   // 默认不解析
+            htmlDecode: "style,script,iframe",  // you can filter tags decode
+            emoji: true,
+            taskList: true,
+            tex: true,  // 默认不解析
+            flowChart: true,  // 默认不解析
+            sequenceDiagram: true   // 默认不解析
         });
     });
     btnWriteBlog.bind('click', function () {
-        window.open("<%=request.getContextPath()%>/editor", "_blank");
+        var bloggerName = '<%=bloggerName%>';
+        if (bloggerName === 'null') {
+            swal({
+                    title: "提示信息",
+                    text: "写博客需要先登录哦!是否现在登录?",
+                    type: "info",
+                    showCancelButton: true,
+                    cancelButtonText: "取消",
+                    confirmButtonText: "确定",
+                    closeOnConfirm: true
+                },
+                function () {
+                    window.location.href = "<%=request.getContextPath()%>/login";
+                });
+        } else {
+            window.open("<%=request.getContextPath()%>/editor", "_blank");
+        }
     });
 </script>
 </body>

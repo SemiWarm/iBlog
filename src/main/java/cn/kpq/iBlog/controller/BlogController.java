@@ -4,6 +4,7 @@ import cn.kpq.iBlog.entity.BaseResponse;
 import cn.kpq.iBlog.entity.Blog;
 import cn.kpq.iBlog.entity.BlogDetail;
 import cn.kpq.iBlog.entity.Blogger;
+import cn.kpq.iBlog.service.impl.BlogDetailServiceImpl;
 import cn.kpq.iBlog.service.impl.BlogServiceImpl;
 import cn.kpq.iBlog.service.impl.BloggerServiceImpl;
 import cn.kpq.iBlog.utils.CommonDateUtils;
@@ -19,18 +20,22 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
 
 /**
+ * blogService
  * Created by alibct on 2017/4/23.
  */
 @Controller
 public class BlogController {
 
-    private final BloggerServiceImpl bloggerService;
+
     private final BlogServiceImpl blogService;
+    private final BloggerServiceImpl bloggerService;
+    private final BlogDetailServiceImpl blogDetailService;
 
     @Autowired
-    public BlogController(BloggerServiceImpl bloggerService, BlogServiceImpl blogService) {
-        this.bloggerService = bloggerService;
+    public BlogController(BlogServiceImpl blogService, BloggerServiceImpl bloggerService, BlogDetailServiceImpl blogDetailService) {
         this.blogService = blogService;
+        this.bloggerService = bloggerService;
+        this.blogDetailService = blogDetailService;
     }
 
     /**
@@ -70,7 +75,7 @@ public class BlogController {
     @RequestMapping(value = "/blogs/pageNum/{pageNum}/pageSize/{pageSize}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public PageInfo<BlogDetail> getAllBlogs(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        return blogService.getAllBlogs(pageNum,pageSize);
+        return blogDetailService.getAllBlogs(pageNum,pageSize);
     }
 
     @RequestMapping(value = "/showBlog/id/{blogId}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -78,16 +83,17 @@ public class BlogController {
     public ModelAndView showBlog(@PathVariable("blogId") Long blogId) throws Exception {
         ModelAndView view = new ModelAndView("showBlog");
         // 根据blogId获取需要的博文信息
-        BlogDetail blogDetail = blogService.getBlogById(blogId);
+        BlogDetail blogDetail = blogDetailService.getBlogDetailByBlogId(blogId);
+
         int start = blogDetail.getBlogTitle().indexOf(" ");
         int end = blogDetail.getBlogTitle().length();
-        String title = blogDetail.getBlogTitle().substring(start, end);
+        String blogTitle = blogDetail.getBlogTitle().substring(start, end);
+        blogDetail.setBlogTitle(blogTitle);
 
         // 博主信息
         Blogger blogger = bloggerService.getBloggerById(blogDetail.getCreateBy());
         view.addObject("blogDetail", blogDetail);
         view.addObject("createAt", CommonDateUtils.getFromatDate(blogDetail.getCreateAt()));
-        view.addObject("title", title);
         view.addObject("blogger", blogger);
         return view;
     }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace是指明Mybatis扫描的目录，即cn.semiwarm.admin.mapper.xxxMapper -->
+<mapper namespace="cn.kpq.iBlog.mapper.BlogDetailMapper">
+
+    <select id="findById" parameterType="java.lang.Long" resultType="cn.kpq.iBlog.entity.BlogDetail">
+        SELECT *
+        FROM Blog, BlogInfo, Blogger
+        WHERE Blog.status = TRUE AND Blog.blog_id = #{blogId} AND BlogInfo.blog_id = Blog.blog_id AND
+              Blogger.blogger_id = Blog.create_by
+    </select>
+
+    <select id="findAll" resultType="cn.kpq.iBlog.entity.BlogDetail">
+        SELECT *
+        FROM Blog, BlogInfo, Blogger
+        WHERE Blog.status = TRUE AND BlogInfo.blog_id = Blog.blog_id AND Blogger.blogger_id = Blog.create_by
+    </select>
+</mapper>
