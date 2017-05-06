@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String bloggerName = (String) session.getAttribute("bloggerName");
+    Long bloggerId = (Long) session.getAttribute("bloggerId");
 %>
 <!DOCTYPE html>
 <html lang="zh">
@@ -48,7 +49,7 @@
             <!-- 右侧 -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="<%=request.getContextPath()%>/">发现</a></li>
+                    <li><a href="<%=request.getContextPath()%>/">发现</a></li>
                     <li><a href="#">关注</a></li>
                 </ul>
 
@@ -64,7 +65,7 @@
                                 <%=bloggerName%>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a>
+                                <li><a href="<%=request.getContextPath()%>/bloggerIndex/<%=bloggerId%>"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a>
                                 </li>
                                 <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;收藏的文章</a>
                                 </li>

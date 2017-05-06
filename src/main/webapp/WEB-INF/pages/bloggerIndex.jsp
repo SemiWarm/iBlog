@@ -3,19 +3,22 @@
   User: alibct
   Date: 2017/4/21
   Time: 下午4:53
-  Desc: 查看博文页面
+  Desc: 个人中心
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String bloggerName = (String) session.getAttribute("bloggerName");
     Long bloggerId = (Long) session.getAttribute("bloggerId");
+    if (null == bloggerName || bloggerName.length() <= 0) {
+        response.sendRedirect(request.getContextPath() + "/");
+    }
 %>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>${blogDetail.blogTitle}</title>
+    <title>${blogger.bloggerName}-个人中心</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/editormd.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/docs.min.css">
@@ -54,18 +57,15 @@
                 </ul>
 
                 <div class="navbar-right">
-                    <a href="<%=request.getContextPath()%>/login" class="btn btn-success navbar-btn"
-                       id="btnLogin"><i
-                            class="fa fa-user"></i>&nbsp;&nbsp;登录
-                    </a>
                     <ul id="dropdownMenu" class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">
-                                <%=bloggerName%>
+                                ${blogger.bloggerName}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<%=request.getContextPath()%>/bloggerIndex/<%=bloggerId%>"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a>
+                                <li><a href="<%=request.getContextPath()%>/bloggerIndex/<%=bloggerId%>"><span
+                                        class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a>
                                 </li>
                                 <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;收藏的文章</a>
                                 </li>
@@ -89,40 +89,55 @@
 
 <!-- 内容区域 -->
 <div class="container">
-    <!-- title -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <h2>${blogDetail.blogTitle}</h2>
-        </div>
-    </div>
-    <!-- userInfo -->
+    <%--用户信息--%>
     <div class="row vertical-align" style="padding-top: 20px">
         <div class="col-lg-1 col-lg-offset-2">
             <!--用户信息-->
             <img class="img-circle" src="${blogger.bloggerAvatar}" alt="${blogger.bloggerName}"
-                 style="width: 60px;height: 60px;">
+                 style="width: 90px;height: 90px;">
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-9" style="margin-left: 10px">
             <!--用户信息-->
             <div class="row">
-                <label class="label label-danger"><span class="glyphicon glyphicon-user"></span>博主</label>
-                <span>${blogger.bloggerName}</span>
-                <label class="label label-success" role="button" style="margin-left: 10px"><span
-                        class="glyphicon glyphicon-plus"></span>关注</label>
+                <div class="col-lg-12">
+                    <label class="label label-danger"><span
+                            class="glyphicon glyphicon-user"></span>${blogger.bloggerName}</label>
+                </div>
             </div>
             <div class="row" style="padding-top: 8px">
-                <span class="text-muted">${createAt} |</span>
-                <span class="text-muted">字数 ${blogDetail.wordCount} |</span>
-                <span class="text-muted">阅读 ${blogDetail.blogHits} |</span>
-                <span class="text-muted">评论 ${blogDetail.blogComments} |</span>
-                <span class="text-muted">喜欢 ${blogDetail.blogStars}</span>
+                <div class="col-lg-12">
+                    <span class="text-muted">${createAt} |</span>
+                    <span class="text-muted">关注 99 |</span>
+                    <span class="text-muted">粉丝 999 |</span>
+                    <span class="text-muted">文章 9 |</span>
+                    <span class="text-muted">收获喜欢 999</span>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 8px">
+                <div class="col-lg-2">
+                    <span class="text-muted">个人简介</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10" style="padding-top: 5px">
+                    不会烧菜的程序员不是一个好厨子
+                </div>
             </div>
         </div>
     </div>
-    <!-- content -->
-    <div>
-        <div class="col-lg-8 col-lg-offset-2" id="content">
-            <textarea style="display:none;">${blogDetail.blogMarkdownContent}</textarea>
+    <%--文章信息--%>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-lg-8 col-lg-offset-2">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#">文章</a></li>
+                <li role="presentation"><a href="#">关注</a></li>
+                <li role="presentation"><a href="#">动态</a></li>
+            </ul>
+        </div>
+    </div>
+    <%--详细信息区域--%>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-lg-8 col-lg-offset-2" id="detailContainer">
         </div>
     </div>
 </div>
@@ -139,44 +154,6 @@
 <script src="<%=request.getContextPath()%>/static/js/editormd.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sweetalert.min.js"></script>
 <script type="text/javascript">
-    var btnLogin = $('#btnLogin');
-    var dropdownMenu = $('#dropdownMenu');
-    var btnWriteBlog = $('#btnWriteBlog');
-    $(function () {
-        var bloggerName = '<%=bloggerName%>';
-        if (bloggerName === 'null') {
-            dropdownMenu.css("display", "none");
-        } else {
-            btnLogin.css("display", "none");
-        }
-        var content = editormd.markdownToHTML("content", {
-            htmlDecode: "style,script,iframe",  // you can filter tags decode
-            emoji: true,
-            taskList: true,
-            tex: true,  // 默认不解析
-            flowChart: true,  // 默认不解析
-            sequenceDiagram: true   // 默认不解析
-        });
-    });
-    btnWriteBlog.bind('click', function () {
-        var bloggerName = '<%=bloggerName%>';
-        if (bloggerName === 'null') {
-            swal({
-                    title: "提示信息",
-                    text: "写博客需要先登录哦!是否现在登录?",
-                    type: "info",
-                    showCancelButton: true,
-                    cancelButtonText: "取消",
-                    confirmButtonText: "确定",
-                    closeOnConfirm: true
-                },
-                function () {
-                    window.location.href = "<%=request.getContextPath()%>/login";
-                });
-        } else {
-            window.open("<%=request.getContextPath()%>/editor", "_blank");
-        }
-    });
 </script>
 </body>
 </html>

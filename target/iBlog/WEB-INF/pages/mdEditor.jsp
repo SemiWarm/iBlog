@@ -60,7 +60,7 @@
                                     <%=bloggerName%>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a>
+                                    <li><a href="<%=request.getContextPath()%>/bloggerIndex/<%=bloggerId%>"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a>
                                     </li>
                                     <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;收藏的文章</a>
                                     </li>

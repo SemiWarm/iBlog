@@ -3,11 +3,14 @@ package cn.kpq.iBlog.controller;
 import cn.kpq.iBlog.entity.BaseResponse;
 import cn.kpq.iBlog.entity.Blogger;
 import cn.kpq.iBlog.service.impl.BloggerServiceImpl;
+import cn.kpq.iBlog.utils.CommonDateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -78,5 +81,18 @@ public class BloggerController {
     @ResponseBody
     public BaseResponse<Blogger> signIn(HttpSession session, Blogger blogger) throws Exception {
         return bloggerService.signIn(session, blogger);
+    }
+
+    @RequestMapping(value = "/bloggerIndex/{bloggerId}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView bloggerIndex(@PathVariable("bloggerId") Long bloggerId) throws Exception {
+        ModelAndView view = new ModelAndView("bloggerIndex");
+        // 整点事情
+        Blogger blogger = bloggerService.getBloggerById(bloggerId);
+
+        String createAt = CommonDateUtils.getFromatDate(blogger.getCreateAt());
+
+        view.addObject("blogger", blogger);
+        view.addObject("createAt", createAt);
+        return view;
     }
 }
