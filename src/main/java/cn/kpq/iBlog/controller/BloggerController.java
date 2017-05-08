@@ -3,6 +3,7 @@ package cn.kpq.iBlog.controller;
 import cn.kpq.iBlog.entity.BaseResponse;
 import cn.kpq.iBlog.entity.Blogger;
 import cn.kpq.iBlog.service.impl.BloggerServiceImpl;
+import cn.kpq.iBlog.service.impl.BloggerStarsServiceImpl;
 import cn.kpq.iBlog.utils.CommonDateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +25,12 @@ import java.util.List;
 public class BloggerController {
 
     private final BloggerServiceImpl bloggerService;
+    private final BloggerStarsServiceImpl bloggerStarsService;
 
     @Autowired
-    public BloggerController(BloggerServiceImpl bloggerService) {
+    public BloggerController(BloggerServiceImpl bloggerService,BloggerStarsServiceImpl bloggerStarsService) {
         this.bloggerService = bloggerService;
+        this.bloggerStarsService = bloggerStarsService;
     }
 
     /**

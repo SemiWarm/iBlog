@@ -206,8 +206,64 @@
             btnLogin.css("display", "none");
             if (bloggerName === '${blogger.bloggerName}') {
                 btnStar.css("display","none");
+            } else {
+                // 如果不是本人就需要获取关注状态
+                // 需要进行ajax请求
+                $.ajax({
+                    type: 'get',
+                    url: '<%=request.getContextPath()%>/bloggerStars',
+                    data: {"bloggerId":<%=bloggerId%>, "starBloggerId":${blogger.bloggerId}},
+                    async: false,
+                    success: function (response) {
+                        if (response["success"] === 1) {
+                            btnStar.text("取消关注");
+                        }
+                    },
+                    error: function (errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
             }
         }
+        btnStar.bind('click', function () {
+            if (bloggerName === 'null') {
+                sweetAlert({title: "出错啦!", text: "想关注别人必须先登录哦!", type: "error"}, function () {
+                    window.location.href = "<%=request.getContextPath()%>/login";
+                });
+            } else {
+                if (btnStar.text() === "关注") {
+                    // 进行ajax请求
+                    $.ajax({
+                        type: 'post',
+                        url: '<%=request.getContextPath()%>/bloggerStars',
+                        data: {"bloggerId":<%=bloggerId%>, "starBloggerId":${blogger.bloggerId}},
+                        async: false,
+                        success: function (response) {
+                            if (response["success"] === 1) {
+                                btnStar.text("取消关注");
+                            }
+                        },
+                        error: function (errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+                } else if (btnStar.text() === "取消关注") {
+                    $.ajax({
+                        type: 'get',
+                        url: '<%=request.getContextPath()%>/bloggerStars/<%=bloggerId%>/${blogger.bloggerId}',
+                        async: false,
+                        success: function (response) {
+                            if (response["success"] === 1) {
+                                btnStar.text("关注");
+                            }
+                        },
+                        error: function (errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+                }
+            }
+        });
         // ajax请求
         $.ajax({
             type: 'get',
