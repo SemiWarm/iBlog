@@ -75,7 +75,14 @@ public class BlogController {
     @RequestMapping(value = "/blogs/pageNum/{pageNum}/pageSize/{pageSize}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public PageInfo<BlogDetail> getAllBlogs(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        return blogDetailService.getAllBlogs(pageNum,pageSize);
+        return blogDetailService.getAllBlogs(pageNum, pageSize);
+    }
+
+
+    @RequestMapping(value = "/blogs/createBy/{createBy}/pageNum/{pageNum}/pageSize/{pageSize}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public PageInfo<BlogDetail> getBlogsByBlogger(@PathVariable("createBy") Long createBy, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
+        return blogDetailService.getBlogsByBlogger(createBy, pageNum, pageSize);
     }
 
     @RequestMapping(value = "/showBlog/id/{blogId}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")

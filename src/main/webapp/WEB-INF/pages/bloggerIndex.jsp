@@ -9,9 +9,6 @@
 <%
     String bloggerName = (String) session.getAttribute("bloggerName");
     Long bloggerId = (Long) session.getAttribute("bloggerId");
-    if (null == bloggerName || bloggerName.length() <= 0) {
-        response.sendRedirect(request.getContextPath() + "/");
-    }
 %>
 <!DOCTYPE html>
 <html lang="zh">
@@ -32,6 +29,31 @@
         .vertical-align {
             display: flex;
             align-items: center;
+        }
+
+        .iBlogContent {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 6;
+        }
+
+        .titleContent {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+
+        .disabled:hover, .disabled:focus {
+            /*解决li标签设为disabled后还能点击的bug*/
+            pointer-events: none;
+            cursor: not-allowed;
+            text-decoration: none;
+            background-color: transparent;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -57,11 +79,14 @@
                 </ul>
 
                 <div class="navbar-right">
+                    <a href="<%=request.getContextPath()%>/login" class="btn btn-success navbar-btn" id="btnLogin"><i
+                            class="fa fa-user"></i>&nbsp;&nbsp;登录
+                    </a>
                     <ul id="dropdownMenu" class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">
-                                ${blogger.bloggerName}
+                                <%=bloggerName%>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="<%=request.getContextPath()%>/bloggerIndex/<%=bloggerId%>"><span
@@ -91,17 +116,19 @@
 <div class="container">
     <%--用户信息--%>
     <div class="row vertical-align" style="padding-top: 20px">
-        <div class="col-lg-1 col-lg-offset-2">
+        <div class="col-lg-1 col-lg-offset-1">
             <!--用户信息-->
             <img class="img-circle" src="${blogger.bloggerAvatar}" alt="${blogger.bloggerName}"
                  style="width: 90px;height: 90px;">
         </div>
-        <div class="col-lg-9" style="margin-left: 10px">
+        <div class="col-lg-10" style="margin-left: 10px">
             <!--用户信息-->
             <div class="row">
                 <div class="col-lg-12">
                     <label class="label label-danger"><span
                             class="glyphicon glyphicon-user"></span>${blogger.bloggerName}</label>
+                    <label class="label label-success" id="btnStar" role="button" style="margin-left: 10px"><span
+                            class="glyphicon glyphicon-plus"></span>关注</label>
                 </div>
             </div>
             <div class="row" style="padding-top: 8px">
@@ -127,33 +154,240 @@
     </div>
     <%--文章信息--%>
     <div class="row" style="margin-top: 30px">
-        <div class="col-lg-8 col-lg-offset-2">
-            <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">文章</a></li>
-                <li role="presentation"><a href="#">关注</a></li>
-                <li role="presentation"><a href="#">动态</a></li>
+        <div class="col-lg-10 col-lg-offset-1">
+            <!-- 导航 tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#blogs" aria-controls="blogs" role="tab"
+                                                          data-toggle="tab">文章</a></li>
+                <li role="presentation"><a href="#stars" aria-controls="stars" role="tab" data-toggle="tab">关注</a></li>
+                <li role="presentation"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">分类</a>
+                </li>
             </ul>
-        </div>
-    </div>
-    <%--详细信息区域--%>
-    <div class="row" style="margin-top: 30px">
-        <div class="col-lg-8 col-lg-offset-2" id="detailContainer">
+
+            <!-- 面板 panes -->
+            <div class="tab-content" style="margin-top: 30px">
+                <div role="tabpanel" class="tab-pane active" id="blogs">
+                    <div class="row" id="detailContainer">
+                    </div>
+                    <div class="row" style="margin-bottom: 20px">
+                        <%--分页按钮--%>
+                        <div class="col-lg-10 col-lg-offset-1 btn btn-info" id="btnMore" role="button">
+                            加载更多
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="stars">
+                    我的关注
+                </div>
+                <div role="tabpanel" class="tab-pane" id="category">
+                    文章分类
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <script src="<%=request.getContextPath()%>/static/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/marked.min.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/prettify.min.js"></script>
-
-<script src="<%=request.getContextPath()%>/static/js/raphael.min.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/underscore.min.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/sequence-diagram.min.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/flowchart.min.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/jquery.flowchart.min.js"></script>
-<script src="<%=request.getContextPath()%>/static/js/editormd.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/date_fns.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/imgLiquid-min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sweetalert.min.js"></script>
 <script type="text/javascript">
+    var blogsPageInfo;
+    var detailContainer = $('#detailContainer');
+    var btnLogin = $('#btnLogin');
+    var dropdownMenu = $('#dropdownMenu');
+    var btnStar = $('#btnStar');
+    var btnMore = $('#btnMore');
+    $(function () {
+        var bloggerName = '<%=bloggerName%>';
+        if (bloggerName === 'null') {
+            dropdownMenu.css("display", "none");
+        } else {
+            btnLogin.css("display", "none");
+            if (bloggerName === '${blogger.bloggerName}') {
+                btnStar.css("display","none");
+            }
+        }
+        // ajax请求
+        $.ajax({
+            type: 'get',
+            url: '<%=request.getContextPath()%>/blogs/createBy/${blogger.bloggerId}/pageNum/1/pageSize/2',
+            async: false,
+            success: function (pageInfo) {
+                blogsPageInfo = pageInfo;
+                console.log(blogsPageInfo["list"]);
+                console.log(blogsPageInfo["hasNextPage"]);
+                if (blogsPageInfo["hasNextPage"] === false) {
+                    btnMore.addClass("disabled");
+                }
+                var blogDetailHtml = "";
+                $.each(blogsPageInfo["list"], function (i, blogDetail) {
+                    // 取信息
+                    var blogId = blogDetail["blogId"];
+                    var bloggerAvatar = blogDetail["bloggerAvatar"];
+                    var bloggerName = blogDetail["bloggerName"];
+                    var createAt = dateFns.format(new Date(blogDetail["createAt"]), "YYYY.MM.DD HH:mm:ss");
+                    var blogTitle = blogDetail["blogTitle"];
+                    var blogHtmlContent = blogDetail["blogHtmlContent"];
+                    var regImageUrl = /(http|https):.*\.(png|jpeg|jpg|gif)/g;
+                    var blogThum = blogDetail["blogThum"].match(regImageUrl)[0];
+                    var blogHits = blogDetail["blogHits"];
+                    var blogCollections = blogDetail["blogCollections"];
+                    var blogComments = blogDetail["blogComments"];
+                    var blogUrl = "<%=request.getContextPath()%>/showBlog/id/" + blogId;
+                    blogDetailHtml +=
+                        "<div class='col-lg-12'>" +
+                        "<div class='row vertical-align'>" +
+                        "<div class='col-lg-1'>" +
+                        "<img class='img-circle' src='" + bloggerAvatar + "' alt='" + bloggerName + "' style='width: 50px;height: 50px;'>" +
+                        "</div>" +
+                        "<div class='col-lg-4'>" +
+                        "<label class='label label-success'>" + bloggerName + "</label>" +
+                        "<span class='text-muted' style='padding-left: 5px'>" + createAt + "</span>" +
+                        "</div>" +
+                        "<div class='col-lg-9 btn-toolbar' role='toolbar'>" +
+                        "<div class='btn-group pull-right' role='group' >" +
+                        "<a href='#' class='btn btn-default'><span class='glyphicon glyphicon-pencil'></span>" +
+                        "</a>" +
+                        "<a href='#' class='btn btn-default'><span class='glyphicon glyphicon-trash'></span>" +
+                        "</a>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='row vertical-align'>" +
+                        "<div class='col-lg-12'>" +
+                        "<div class='bs-callout'>" +
+                        "<div class='row'>" +
+                        "<div class='col-lg-9'>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
+                        "<h4 class='titleContent'>" + blogTitle + "</h4>" +
+                        "</a>" +
+                        "<p class='iBlogContent'>" + blogHtmlContent + "</p>" +
+                        "</div>" +
+                        "<div class='col-lg-3 imgLiquidFill imgLiquid' style='width: 190px;height: 160px'>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
+                        "<img class='img-thumbnail' src='" + blogThum + "'>" +
+                        "</a>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                        "<div class='col-lg-12'>" +
+                        "<label class='label label-danger'>@程序员 @散文 @热点</label><span style='padding-left: 10px'></span>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
+                        "<i class='fa fa-eye text-muted'>  " + blogHits + "</i><span style='padding-left: 10px'></span>" +
+                        "</a>" +
+                        "<i class='fa fa-bookmark-o text-muted'>  " + blogCollections + "</i><span style='padding-left: 10px'></span>" +
+                        "<i class='fa fa-commenting-o text-muted'>  " + blogComments + "</i>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "<hr>" +
+                        "</div>";
+                });
+                detailContainer.html(blogDetailHtml);
+                // 初始化图片加载
+                $(".imgLiquidFill").imgLiquid({
+                    fill: true
+                });
+            },
+            error: function (errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+
+        // 获取更多按钮
+        btnMore.bind('click', function () {
+            // ajax请求
+            $.ajax({
+                type: 'get',
+                url: "<%=request.getContextPath()%>/blogs/createBy/${blogger.bloggerId}/pageNum/" + blogsPageInfo["nextPage"] + "/pageSize/2",
+                async: false,
+                success: function (pageInfo) {
+                    blogsPageInfo = pageInfo;
+                    console.log(blogsPageInfo["list"]);
+                    if (blogsPageInfo["hasNextPage"] === false) {
+                        btnMore.addClass("disabled");
+                    }
+                    var blogDetailHtml = "";
+                    $.each(blogsPageInfo["list"], function (i, blogDetail) {
+                        // 取信息
+                        var blogId = blogDetail["blogId"];
+                        var bloggerAvatar = blogDetail["bloggerAvatar"];
+                        var bloggerName = blogDetail["bloggerName"];
+                        var createAt = dateFns.format(new Date(blogDetail["createAt"]), "YYYY.MM.DD HH:mm:ss");
+                        var blogTitle = blogDetail["blogTitle"];
+                        var blogHtmlContent = blogDetail["blogHtmlContent"];
+                        var regImageUrl = /(http|https):.*\.(png|jpeg|jpg|gif)/g;
+                        var blogThum = blogDetail["blogThum"].match(regImageUrl)[0];
+                        var blogHits = blogDetail["blogHits"];
+                        var blogCollections = blogDetail["blogCollections"];
+                        var blogComments = blogDetail["blogComments"];
+                        var blogUrl = "<%=request.getContextPath()%>/showBlog/id/" + blogId;
+                        blogDetailHtml +=
+                            "<div class='col-lg-12'>" +
+                            "<div class='row vertical-align'>" +
+                            "<div class='col-lg-1'>" +
+                            "<img class='img-circle' src='" + bloggerAvatar + "' alt='" + bloggerName + "' style='width: 50px;height: 50px;'>" +
+                            "</div>" +
+                            "<div class='col-lg-4'>" +
+                            "<label class='label label-success'>" + bloggerName + "</label>" +
+                            "<span class='text-muted' style='padding-left: 5px'>" + createAt + "</span>" +
+                            "</div>" +
+                            "<div class='col-lg-9 btn-toolbar' role='toolbar'>" +
+                            "<div class='btn-group pull-right' role='group' >" +
+                            "<a href='#' class='btn btn-default'><span class='glyphicon glyphicon-pencil'></span>" +
+                            "</a>" +
+                            "<a href='#' class='btn btn-default'><span class='glyphicon glyphicon-trash'></span>" +
+                            "</a>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "<div class='row vertical-align'>" +
+                            "<div class='col-lg-12'>" +
+                            "<div class='bs-callout'>" +
+                            "<div class='row'>" +
+                            "<div class='col-lg-9'>" +
+                            "<a href='" + blogUrl + "' target='_blank'>" +
+                            "<h4 class='titleContent'>" + blogTitle + "</h4>" +
+                            "</a>" +
+                            "<p class='iBlogContent'>" + blogHtmlContent + "</p>" +
+                            "</div>" +
+                            "<div class='col-lg-3 imgLiquidFill imgLiquid' style='width: 190px;height: 160px'>" +
+                            "<a href='" + blogUrl + "' target='_blank'>" +
+                            "<img class='img-thumbnail' src='" + blogThum + "'>" +
+                            "</a>" +
+                            "</div>" +
+                            "</div>" +
+                            "<div class='row'>" +
+                            "<div class='col-lg-12'>" +
+                            "<label class='label label-danger'>@程序员 @散文 @热点</label><span style='padding-left: 10px'></span>" +
+                            "<a href='" + blogUrl + "' target='_blank'>" +
+                            "<i class='fa fa-eye text-muted'>  " + blogHits + "</i><span style='padding-left: 10px'></span>" +
+                            "</a>" +
+                            "<i class='fa fa-bookmark-o text-muted'>  " + blogCollections + "</i><span style='padding-left: 10px'></span>" +
+                            "<i class='fa fa-commenting-o text-muted'>  " + blogComments + "</i>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "<hr>" +
+                            "</div>";
+                    });
+                    detailContainer.append(blogDetailHtml);
+                    // 初始化图片加载
+                    $(".imgLiquidFill").imgLiquid({
+                        fill: true
+                    });
+                },
+                error: function (errorMessage) {
+                    console.log(errorMessage);
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>

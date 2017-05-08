@@ -15,4 +15,6 @@ public interface BlogDetailMapper extends BaseMapper<BlogDetail> {
 
     // 获取Blog列表
     List<BlogDetail> findAll();
+
+    List<BlogDetail> findByBlogger(Serializable createBy);
 }

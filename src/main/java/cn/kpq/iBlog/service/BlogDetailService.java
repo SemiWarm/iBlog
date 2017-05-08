@@ -15,4 +15,6 @@ public interface BlogDetailService {
 
     // 获取所有博文item
     PageInfo<BlogDetail> getAllBlogs(int pageNum, int pageSize) throws Exception;
+
+    PageInfo<BlogDetail> getBlogsByBlogger(Serializable createBy, int pageNum, int pageSize) throws Exception;
 }

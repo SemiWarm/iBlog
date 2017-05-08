@@ -107,7 +107,7 @@
             <div class="row">
                 <label class="label label-danger"><span class="glyphicon glyphicon-user"></span>博主</label>
                 <span>${blogger.bloggerName}</span>
-                <label class="label label-success" role="button" style="margin-left: 10px"><span
+                <label class="label label-success" id="btnStar" role="button" style="margin-left: 10px"><span
                         class="glyphicon glyphicon-plus"></span>关注</label>
             </div>
             <div class="row" style="padding-top: 8px">
@@ -141,6 +141,7 @@
 <script type="text/javascript">
     var btnLogin = $('#btnLogin');
     var dropdownMenu = $('#dropdownMenu');
+    var btnStar = $('#btnStar');
     var btnWriteBlog = $('#btnWriteBlog');
     $(function () {
         var bloggerName = '<%=bloggerName%>';
@@ -148,6 +149,9 @@
             dropdownMenu.css("display", "none");
         } else {
             btnLogin.css("display", "none");
+            if (bloggerName === '${blogger.bloggerName}') {
+                btnStar.css("display","none");
+            }
         }
         var content = editormd.markdownToHTML("content", {
             htmlDecode: "style,script,iframe",  // you can filter tags decode

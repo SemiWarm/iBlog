@@ -15,4 +15,11 @@
         FROM Blog, BlogInfo, Blogger
         WHERE Blog.status = TRUE AND BlogInfo.blog_id = Blog.blog_id AND Blogger.blogger_id = Blog.create_by
     </select>
+
+    <select id="findByBlogger" parameterType="java.lang.Long" resultType="cn.kpq.iBlog.entity.BlogDetail">
+        SELECT *
+        FROM Blog, BlogInfo, Blogger
+        WHERE Blog.status = TRUE AND Blog.create_by = #{createBy} AND BlogInfo.blog_id = Blog.blog_id AND
+              Blogger.blogger_id = Blog.create_by
+    </select>
 </mapper>

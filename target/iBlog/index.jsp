@@ -53,6 +53,15 @@
             display: flex;
             align-items: center;
         }
+
+        .disabled:hover, .disabled:focus {
+            /*解决li标签设为disabled后还能点击的bug*/
+            pointer-events: none;
+            cursor: not-allowed;
+            text-decoration: none;
+            background-color: transparent;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -86,7 +95,8 @@
                                 <%=bloggerName%>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<%=request.getContextPath()%>/bloggerIndex/<%=bloggerId%>"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a></li>
+                                <li><a href="<%=request.getContextPath()%>/bloggerIndex/<%=bloggerId%>"><span
+                                        class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;收藏的文章</a>
                                 </li>
                                 <li><a href="#"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;喜欢的文章</a>
@@ -258,6 +268,8 @@
                 $.each(blogsPageInfo["list"], function (i, blogDetail) {
                     // 取信息
                     var blogId = blogDetail["blogId"];
+                    var bloggerId = blogDetail["createBy"];
+                    var bloggerIndexUrl = "<%=request.getContextPath()%>/bloggerIndex/" + bloggerId;
                     var bloggerAvatar = blogDetail["bloggerAvatar"];
                     var bloggerName = blogDetail["bloggerName"];
                     var createAt = dateFns.format(new Date(blogDetail["createAt"]), "YYYY.MM.DD HH:mm:ss");
@@ -274,10 +286,14 @@
                         "<hr>" +
                         "<div class='row vertical-align'>" +
                         "<div class='col-lg-1'>" +
+                        "<a href='" + bloggerIndexUrl + "' target='_blank'>" +
                         "<img class='img-circle' src='" + bloggerAvatar + "' alt='" + bloggerName + "' style='width: 50px;height: 50px;'>" +
+                        "</a>" +
                         "</div>" +
                         "<div class='col-lg-4'>" +
+                        "<a href='" + bloggerIndexUrl + "' target='_blank'>" +
                         "<label class='label label-success'>" + bloggerName + "</label>" +
+                        "</a>" +
                         "<span class='text-muted' style='padding-left: 5px'>" + createAt + "</span>" +
                         "</div>" +
                         "</div>" +
@@ -286,13 +302,13 @@
                         "<div class='bs-callout'>" +
                         "<div class='row'>" +
                         "<div class='col-lg-9'>" +
-                        "<a href='"+ blogUrl +"' target='_blank'>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
                         "<h4 class='titleContent'>" + blogTitle + "</h4>" +
                         "</a>" +
                         "<p class='iBlogContent'>" + blogHtmlContent + "</p>" +
                         "</div>" +
                         "<div class='col-lg-3 imgLiquidFill imgLiquid' style='width: 190px;height: 160px'>" +
-                        "<a href='"+ blogUrl +"' target='_blank'>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
                         "<img class='img-thumbnail' src='" + blogThum + "'>" +
                         "</a>" +
                         "</div>" +
@@ -300,7 +316,7 @@
                         "<div class='row'>" +
                         "<div class='col-lg-12'>" +
                         "<label class='label label-danger'>@程序员 @散文 @热点</label><span style='padding-left: 10px'></span>" +
-                        "<a href='"+ blogUrl +"' target='_blank'>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
                         "<i class='fa fa-eye text-muted'>  " + blogHits + "</i><span style='padding-left: 10px'></span>" +
                         "</a>" +
                         "<i class='fa fa-bookmark-o text-muted'>  " + blogCollections + "</i><span style='padding-left: 10px'></span>" +
@@ -324,7 +340,7 @@
         });
     });
 
-    btnMore.bind('click',function () {
+    btnMore.bind('click', function () {
         // ajax请求
         $.ajax({
             type: 'get',
@@ -342,6 +358,8 @@
                 $.each(blogsPageInfo["list"], function (i, blogDetail) {
                     // 取信息
                     var blogId = blogDetail["blogId"];
+                    var bloggerId = blogDetail["createBy"];
+                    var bloggerIndexUrl = "<%=request.getContextPath()%>/bloggerIndex/" + bloggerId;
                     var bloggerAvatar = blogDetail["bloggerAvatar"];
                     var bloggerName = blogDetail["bloggerName"];
                     var createAt = dateFns.format(new Date(blogDetail["createAt"]), "YYYY.MM.DD HH:mm:ss");
@@ -358,10 +376,14 @@
                         "<hr>" +
                         "<div class='row vertical-align'>" +
                         "<div class='col-lg-1'>" +
+                        "<a href='" + bloggerIndexUrl + "' target='_blank'>" +
                         "<img class='img-circle' src='" + bloggerAvatar + "' alt='" + bloggerName + "' style='width: 50px;height: 50px;'>" +
+                        "</a>" +
                         "</div>" +
                         "<div class='col-lg-4'>" +
+                        "<a href='" + bloggerIndexUrl + "' target='_blank'>" +
                         "<label class='label label-success'>" + bloggerName + "</label>" +
+                        "</a>" +
                         "<span class='text-muted' style='padding-left: 5px'>" + createAt + "</span>" +
                         "</div>" +
                         "</div>" +
@@ -370,13 +392,13 @@
                         "<div class='bs-callout'>" +
                         "<div class='row'>" +
                         "<div class='col-lg-9'>" +
-                        "<a href='"+ blogUrl +"' target='_blank'>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
                         "<h4 class='titleContent'>" + blogTitle + "</h4>" +
                         "</a>" +
                         "<p class='iBlogContent'>" + blogHtmlContent + "</p>" +
                         "</div>" +
                         "<div class='col-lg-3 imgLiquidFill imgLiquid' style='width: 190px;height: 160px'>" +
-                        "<a href='"+ blogUrl +"' target='_blank'>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
                         "<img class='img-thumbnail' src='" + blogThum + "'>" +
                         "</a>" +
                         "</div>" +
@@ -384,7 +406,7 @@
                         "<div class='row'>" +
                         "<div class='col-lg-12'>" +
                         "<label class='label label-danger'>@程序员 @散文 @热点</label><span style='padding-left: 10px'></span>" +
-                        "<a href='"+ blogUrl +"' target='_blank'>" +
+                        "<a href='" + blogUrl + "' target='_blank'>" +
                         "<i class='fa fa-eye text-muted'>  " + blogHits + "</i><span style='padding-left: 10px'></span>" +
                         "</a>" +
                         "<i class='fa fa-bookmark-o text-muted'>  " + blogCollections + "</i><span style='padding-left: 10px'></span>" +

@@ -52,4 +52,22 @@ public class BlogDetailServiceImpl implements BlogDetailService {
 
         return new PageInfo<BlogDetail>(blogDetails);
     }
+
+    public PageInfo<BlogDetail> getBlogsByBlogger(Serializable createBy, int pageNum, int pageSize) throws Exception {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BlogDetail> blogDetails = blogDetailMapper.findByBlogger(createBy);
+
+        for (BlogDetail blogDetail : blogDetails) {
+            // 处理标题
+            int start = blogDetail.getBlogTitle().indexOf(" ");
+            int end = blogDetail.getBlogTitle().length();
+            String blogTitle = blogDetail.getBlogTitle().substring(start, end);
+            blogDetail.setBlogTitle(blogTitle);
+            // 处理html内容
+            String blogHtmlContent = Jsoup.clean(blogDetail.getBlogHtmlContent(), new Whitelist());
+            blogDetail.setBlogHtmlContent(blogHtmlContent);
+        }
+
+        return new PageInfo<BlogDetail>(blogDetails);
+    }
 }

@@ -99,7 +99,7 @@
     <div class="row vertical-align">
         <div class="col-lg-12">
             <form class="form-signin">
-                <h2 class="form-signin-heading logo hide-text">iBlog</h2>
+                <a href="<%=request.getContextPath()%>/"><h2 class="form-signin-heading logo hide-text">iBlog</h2></a>
                 <!-- 账号 -->
                 <label for="bloggerAccount" class="sr-only">Email address</label>
                 <input type="email" id="bloggerAccount" name="bloggerAccount" class="form-control" placeholder="邮箱"
