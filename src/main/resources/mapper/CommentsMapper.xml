@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace是指明Mybatis扫描的目录，即cn.semiwarm.admin.mapper.xxxMapper -->
+<mapper namespace="cn.kpq.iBlog.mapper.CommentsMapper">
+    <insert id="add" parameterType="cn.kpq.iBlog.entity.Comments">
+        INSERT INTO Comments (comment_id, blog_id, comment_content, comment_by)
+        VALUES (#{commentId}, #{blogId}, #{commentContent}, #{commentBy})
+    </insert>
+    <delete id="delete" parameterType="cn.kpq.iBlog.entity.Comments">
+        DELETE FROM Comments
+        WHERE comment_id = #{commentId}
+    </delete>
+    <update id="update" parameterType="cn.kpq.iBlog.entity.Comments">
+    </update>
+    <select id="findById" parameterType="cn.kpq.iBlog.entity.Comments" resultType="cn.kpq.iBlog.entity.Comments">
+        SELECT *
+        FROM Comments
+        WHERE comment_id = #{commentId}
+    </select>
+    <select id="findAll" resultType="cn.kpq.iBlog.entity.Comments">
+        SELECT *
+        FROM Comments
+    </select>
+    <select id="findAllByBlogId" parameterType="java.lang.Long" resultType="cn.kpq.iBlog.entity.Comments">
+        SELECT *
+        FROM Comments
+        WHERE blog_id = #{blogId}
+    </select>
+</mapper>

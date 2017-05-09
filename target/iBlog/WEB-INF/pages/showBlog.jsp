@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alibct
@@ -8,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String bloggerName = (String) session.getAttribute("bloggerName");
+    String bloggerAvatar = (String) session.getAttribute("bloggerAvatar");
     Long bloggerId = (Long) session.getAttribute("bloggerId");
 %>
 <!DOCTYPE html>
@@ -121,10 +123,93 @@
         </div>
     </div>
     <!-- content -->
-    <div>
+    <div class="row">
         <div class="col-lg-8 col-lg-offset-2" id="content">
             <textarea style="display:none;">${blogDetail.blogMarkdownContent}</textarea>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <hr>
+        </div>
+    </div>
+
+    <%--评论区域--%>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-lg-1 col-lg-offset-2" id="commentField">
+            <%
+                if (null == bloggerAvatar) {
+            %>
+            <img class="img-circle" src="<%=request.getContextPath()%>/static/images/thum.png" alt="用户"
+                 style="width: 70px;height: 70px;">
+            <%
+            } else {
+            %>
+            <img class="img-circle" src="<%=bloggerAvatar%>" alt="<%=bloggerName%>"
+                 style="width: 70px;height: 70px;">
+            <%
+                }
+            %>
+        </div>
+        <div class="col-lg-7">
+            <%
+                if (null == bloggerAvatar) {
+            %>
+            <div class="jumbotron">
+                <p class="lead">请先<a href="<%=request.getContextPath()%>/login" class="btn-xs btn-info"
+                                     style="font-size: 20px">登录</a>后再做评论</p>
+            </div>
+            <%
+            } else {
+            %>
+            <textarea class="form-control" rows="3" placeholder="请写下你的评论" id="commentContent"></textarea>
+            <%
+                }
+            %>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+        <%
+            if (null != bloggerAvatar) {
+        %>
+        <div class="col-lg-1 col-lg-offset-9">
+            <button class="btn btn-success form-control" id="sendComments">发送</button>
+        </div>
+        <%
+            }
+        %>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <hr>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h4>${commentsCount}条评论</h4>
+        </div>
+    </div>
+    <div id="showComments" style="margin-bottom: 20px">
+        <c:forEach items="${comments}" var="comment" varStatus="status">
+            <div class="row" style="margin-top: 20px">
+                <div class="row vertical-align">
+                    <div class="col-lg-1 col-lg-offset-2">
+                        <img class="img-circle" src="${commentBloggers.get(status.index).bloggerAvatar}"
+                             alt="${commentBloggers.get(status.index).bloggerName}"
+                             style="width: 70px;height: 70px;">
+                    </div>
+                    <div class="col-lg-9">
+                        <label class="label label-success">${commentBloggers.get(status.index).bloggerName}</label>
+                        <span class="text-muted">${commentTimeList.get(status.index)}</span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-lg-9 col-lg-offset-3">
+                        <p>${comment.commentContent}</p>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
     </div>
 </div>
 <script src="<%=request.getContextPath()%>/static/js/jquery.min.js"></script>
@@ -144,6 +229,11 @@
     var dropdownMenu = $('#dropdownMenu');
     var btnStar = $('#btnStar');
     var btnWriteBlog = $('#btnWriteBlog');
+
+    var commentContent = $('#commentContent');
+    var sendComments = $('#sendComments');
+
+
     $(function () {
         var bloggerName = '<%=bloggerName%>';
         if (bloggerName === 'null') {
@@ -170,6 +260,33 @@
                     }
                 });
             }
+
+
+            // 绑定评论按钮事件
+            sendComments.bind('click', function () {
+                // ajax评论
+                $.ajax({
+                    type: 'post',
+                    url: '<%=request.getContextPath()%>/comments',
+                    data: {
+                        "blogId":${blogDetail.blogId},
+                        "commentContent": commentContent.val(),
+                        "commentBy":<%=bloggerId%>
+                    },
+                    async: false,
+                    success: function (response) {
+                        if (response["success"] === 1) {
+                            sweetAlert({title: "添加成功!", text: "评论成功!", type: "success"}, function () {
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function (errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+                // 添加到评论区域最前面
+            });
         }
         btnStar.bind('click', function () {
 

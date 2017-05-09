@@ -51,8 +51,9 @@ public class BloggerServiceImpl implements BloggerService {
             response.setMessage("登录成功!");
             response.setData(null);
 
-            session.setAttribute("bloggerName",result.getBloggerName());
-            session.setAttribute("bloggerId",result.getBloggerId());
+            session.setAttribute("bloggerName", result.getBloggerName());
+            session.setAttribute("bloggerId", result.getBloggerId());
+            session.setAttribute("bloggerAvatar", result.getBloggerAvatar());
 
         } else {
             response.setSuccess(0);
