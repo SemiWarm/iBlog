@@ -28,7 +28,7 @@ public class BloggerController {
     private final BloggerStarsServiceImpl bloggerStarsService;
 
     @Autowired
-    public BloggerController(BloggerServiceImpl bloggerService,BloggerStarsServiceImpl bloggerStarsService) {
+    public BloggerController(BloggerServiceImpl bloggerService, BloggerStarsServiceImpl bloggerStarsService) {
         this.bloggerService = bloggerService;
         this.bloggerStarsService = bloggerStarsService;
     }
@@ -42,7 +42,15 @@ public class BloggerController {
     @RequestMapping(value = "/bloggers", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<Blogger> getAllBloggers() throws Exception {
-        return bloggerService.getAllBloggers();
+
+        List<Blogger> bloggers = bloggerService.getAllBloggers();
+
+        for (Blogger blogger : bloggers) {
+            String newAvatar = "<button type='button' class='btn btn-success btn-xs' data-toggle='modal' data-target='#imagePreviewModal' value='" + blogger.getBloggerAvatar() + "'>预览图片</button>";
+            blogger.setBloggerAvatar(newAvatar);
+        }
+
+        return bloggers;
     }
 
     /**

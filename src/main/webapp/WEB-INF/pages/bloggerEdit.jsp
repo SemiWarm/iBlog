@@ -80,9 +80,14 @@
 
                     <div class="col-lg-12">
                         <table id="bloggerTable"
+                               data-toggle="table"
                                data-toolbar="#toolBar"
-                               data-toggle="bloggerTable"
-                               data-click-to-select="true">
+                               data-click-to-select="true"
+                               data-url="<%=request.getContextPath()%>/bloggers"
+                               data-pagination="true"
+                               data-side-pagination="client"
+                               data-page-size="2"
+                               data-page-list="[5,10]">
                             <thead>
                             <tr>
                                 <th rowspan="2" data-field="state" data-radio="true" data-halign="center"
@@ -92,12 +97,16 @@
                                 <th rowspan="2" data-field="bloggerId" data-halign="center" data-align="center"
                                     data-valign="middle">博主ID
                                 </th>
-                                <th colspan="4" data-halign="center" data-align="center" data-valign="middle">博主信息</th>
+                                <th colspan="5" data-halign="center" data-align="center" data-valign="middle">博主信息</th>
                             </tr>
                             <tr>
                                 <th data-field="bloggerName" data-halign="center" data-align="center"
                                     data-valign="middle">
                                     博主昵称
+                                </th>
+                                <th data-field="bloggerAccount" data-halign="center" data-align="center"
+                                    data-valign="middle">
+                                    博主账号
                                 </th>
                                 <th data-field="bloggerProfile" data-halign="center" data-align="center"
                                     data-valign="middle">
@@ -144,61 +153,6 @@
 
             </div>
         </div>
-
-
-        <div class="col-lg-12 paddingTop">
-            <div class="panel panel-success">
-
-                <div class="panel-heading">添加博主</div>
-                <div class="panel-body">
-
-                    <!-- 表单 -->
-                    <form class="form-horizontal">
-                        <!-- 账号 -->
-                        <div class="form-group">
-                            <label class="col-lg-offset-2 col-lg-2 control-label">邮箱</label>
-                            <div class="col-lg-6">
-                                <input type="email" class="form-control" placeholder="" required>
-                            </div>
-                        </div>
-                        <!-- 昵称 -->
-                        <div class="form-group">
-                            <label class="col-lg-offset-2 col-lg-2 control-label">昵称</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" placeholder="" required>
-                            </div>
-                        </div>
-                        <!-- 密码 -->
-                        <div class="form-group">
-                            <label class="col-lg-offset-2 col-lg-2 control-label">密码</label>
-                            <div class="col-lg-6">
-                                <input type="password" class="form-control" placeholder="" required>
-                            </div>
-                        </div>
-                        <!-- 确认密码 -->
-                        <div class="form-group">
-                            <label class="col-lg-offset-2 col-lg-2 control-label">确认密码</label>
-                            <div class="col-lg-6">
-                                <input type="password" class="form-control" placeholder="" required>
-                            </div>
-                        </div>
-                        <!-- 按钮 -->
-                        <div class="form-group">
-                            <div class="col-lg-offset-2 col-lg-2">
-
-                            </div>
-                            <div class="col-lg-6">
-                                <button type="reset" class="btn btn-default pull-left">重 置</button>
-                                <button type="submit" class="btn btn-success pull-right">注 册</button>
-                            </div>
-                        </div>
-                    </form>
-
-
-                </div>
-
-            </div>
-        </div>
     </div>
 </div>
 
@@ -208,25 +162,6 @@
 <script src="<%=request.getContextPath()%>/static/js/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript">
     var bloggerTable = $('#bloggerTable');
-    $(function () {
-        // 页面加载完成后进行ajax请求
-        $.ajax({
-            type: 'get',
-            url: '<%=request.getContextPath()%>/bloggers',
-            // 同步请求解决布局错乱问题
-            async: false,
-            success: function (bloggers) {
-                // 请求成功后对每一个类目信息进行处理
-                $.each(bloggers, function (i, item) {
-                    item["bloggerAvatar"] = "<button type='button' class='btn btn-success btn-xs' data-toggle='modal' data-target='#imagePreviewModal' value='" + item["bloggerAvatar"] + "'>预览图片</button>";
-                });
-                bloggerTable.bootstrapTable({data: bloggers});
-            },
-            error: function (errorMessage) {
-                console.log(errorMessage);
-            }
-        });
-    });
 
     $('#imagePreviewModal').on('show.bs.modal', function (e) {
         // 获取启动模态框的对象
