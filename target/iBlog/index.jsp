@@ -96,10 +96,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="<%=request.getContextPath()%>/bloggerIndex/<%=bloggerId%>"><span
-                                        class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;我的主页</a></li>
+                                        class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;我的主页</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;收藏的文章</a>
                                 </li>
                                 <li><a href="#"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;喜欢的文章</a>
+                                </li>
+                                <li><a href="<%=request.getContextPath()%>/bloggerCenter/<%=bloggerId%>"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人信息</a>
                                 </li>
                                 <li><a href="<%=request.getContextPath()%>/quit"><span
                                         class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;退出</a></li>

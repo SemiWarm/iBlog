@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * BlogService
  * Created by alibct on 2017/4/23.
  */
 public interface BlogService {

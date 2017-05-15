@@ -106,4 +106,16 @@ public class BloggerController {
         view.addObject("createAt", createAt);
         return view;
     }
+
+    @RequestMapping(value = "/bloggerCenter/{bloggerId}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView bloggerCenter(@PathVariable("bloggerId") Long bloggerId) throws Exception {
+
+        ModelAndView view = new ModelAndView("bloggerCenter");
+
+        Blogger blogger = bloggerService.getBloggerById(bloggerId);
+
+        view.addObject("blogger", blogger);
+
+        return view;
+    }
 }
