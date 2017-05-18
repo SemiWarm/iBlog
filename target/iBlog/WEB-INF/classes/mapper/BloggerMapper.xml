@@ -35,4 +35,10 @@
         FROM Blogger
         WHERE status = TRUE AND blogger_account = #{bloggerAccount} AND login_password = password(#{loginPassword})
     </select>
+
+    <select id="findAllByBloggerName" parameterType="java.lang.String" resultType="cn.kpq.iBlog.entity.Blogger">
+        SELECT *
+        FROM Blogger
+        WHERE blogger_name LIKE concat('%', #{searchText}, '%')
+    </select>
 </mapper>

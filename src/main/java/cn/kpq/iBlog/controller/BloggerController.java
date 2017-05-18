@@ -59,15 +59,41 @@ public class BloggerController {
         return bloggers;
     }
 
+    /**
+     * 删除用户
+     *
+     * @param blogger 需要删除的用户
+     * @return 删除后的响应
+     * @throws Exception 异常
+     */
+    @RequestMapping(value = "/delete/blogger", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public BaseResponse<Blogger> deleteBlogger(Blogger blogger) throws Exception {
+        BaseResponse<Blogger> response = new BaseResponse<Blogger>();
+        int result = bloggerService.deleteBlogger(blogger);
+        if (result > 0) {
+            response.setSuccess(1);
+            response.setMessage("删除成功!");
+            response.setData(null);
+        } else {
+            response.setSuccess(0);
+            response.setMessage("删除失败!");
+            response.setData(null);
+        }
+        return response;
+    }
+
     @RequestMapping(value = "/update/blogger", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public BaseResponse<Blogger> updateBlogger(Blogger blogger) throws Exception {
+    public BaseResponse<Blogger> updateBlogger(HttpSession session, Blogger blogger) throws Exception {
         BaseResponse<Blogger> response = new BaseResponse<Blogger>();
         int result = bloggerService.updateBlogger(blogger);
         if (result > 0) {
             response.setSuccess(1);
             response.setMessage("更新成功!");
             response.setData(blogger);
+            session.setAttribute("bloggerAvatar", blogger.getBloggerAvatar()); // 更新预存储头像
+            session.setAttribute("bloggerName", blogger.getBloggerName()); // 更新预存储昵称
         } else {
             response.setSuccess(1);
             response.setMessage("更新失败!");
@@ -134,8 +160,8 @@ public class BloggerController {
 
         view.addObject("blogCount", blogCount);
         view.addObject("blogger", blogger);
-        view.addObject("blogStarCount",blogStarCount);
-        view.addObject("blogStaredCount",blogStaredCount);
+        view.addObject("blogStarCount", blogStarCount);
+        view.addObject("blogStaredCount", blogStaredCount);
         view.addObject("createAt", createAt);
         return view;
     }
@@ -150,5 +176,23 @@ public class BloggerController {
         view.addObject("blogger", blogger);
 
         return view;
+    }
+
+    /**
+     * 搜索
+     *
+     * @param searchText 搜索字段
+     * @return 用户列表
+     * @throws Exception 异常
+     */
+    @RequestMapping(value = "/searchBlogger", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public List<Blogger> searchBloggerByName(String searchText) throws Exception {
+        List<Blogger> bloggers = bloggerService.getAllBloggersByBloggerName(searchText);
+        for (Blogger blogger : bloggers) {
+            String newAvatar = "<button type='button' class='btn btn-success btn-xs' data-toggle='modal' data-target='#imagePreviewModal' value='" + blogger.getBloggerAvatar() + "'>预览图片</button>";
+            blogger.setBloggerAvatar(newAvatar);
+        }
+        return bloggers;
     }
 }

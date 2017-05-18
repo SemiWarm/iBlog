@@ -21,5 +21,7 @@ public interface BloggerService {
 
     List<Blogger> getAllBloggers() throws Exception;
 
+    public List<Blogger> getAllBloggersByBloggerName(String searchText) throws Exception;
+
     BaseResponse<Blogger> signIn(HttpSession session, Blogger blogger) throws Exception;
 }

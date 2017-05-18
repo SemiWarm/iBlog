@@ -210,4 +210,39 @@ public class BlogController {
 
         return response;
     }
+
+    @RequestMapping(value = "/blogDetails", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public BaseResponse<List<BlogDetail>> getAllBlogDetails() throws Exception {
+        BaseResponse<List<BlogDetail>> response = new BaseResponse<List<BlogDetail>>();
+        List<BlogDetail> blogDetails = blogDetailService.getAllBlogDetails();
+        if (null != blogDetails) {
+            for (BlogDetail blogDetail : blogDetails) {
+                List<Comments> comments = commentsService.getAllCommentsByBlogId(blogDetail.getBlogId());
+                blogDetail.setBlogComments((long) comments.size());
+            }
+            response.setSuccess(1);
+            response.setMessage("博客信息列表");
+            response.setData(blogDetails);
+        } else {
+            response.setSuccess(0);
+            response.setMessage("没有数据");
+            response.setData(null);
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "/searchBlogDetails", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public List<BlogDetail> searchBlogDetails(String searchText) throws Exception {
+        List<BlogDetail> blogDetails = blogDetailService.getAllBlogDetailsByTitle(searchText);
+        if (null != blogDetails) {
+            for (BlogDetail blogDetail : blogDetails) {
+                List<Comments> comments = commentsService.getAllCommentsByBlogId(blogDetail.getBlogId());
+                blogDetail.setBlogComments((long) comments.size());
+            }
+        }
+        return blogDetails;
+    }
 }

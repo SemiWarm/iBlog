@@ -45,6 +45,11 @@ public class BloggerServiceImpl implements BloggerService {
         return bloggerMapper.findAll();
     }
 
+    public List<Blogger> getAllBloggersByBloggerName(String searchText) throws Exception {
+        return bloggerMapper.findAllByBloggerName(searchText);
+    }
+
+
     public BaseResponse<Blogger> signIn(HttpSession session, Blogger blogger) throws Exception {
 
         BaseResponse<Blogger> response = new BaseResponse<Blogger>();

@@ -44,7 +44,7 @@ public class MainController {
 
     @RequestMapping(value = "/blog", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public ModelAndView blog() throws Exception {
-        return new ModelAndView("blogEdit");
+        return new ModelAndView("blog");
     }
 
     @RequestMapping(value = "/editor", method = RequestMethod.GET, produces = "application/json;charset=utf-8")

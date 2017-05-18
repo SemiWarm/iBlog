@@ -32,6 +32,10 @@ public class BlogDetailServiceImpl implements BlogDetailService {
         return blogDetailMapper.findById(blogId);
     }
 
+    public List<BlogDetail> getAllBlogDetails() throws Exception {
+        return blogDetailMapper.findAll();
+    }
+
     public PageInfo<BlogDetail> getAllBlogs(int pageNum, int pageSize) throws Exception {
 
         PageHelper.startPage(pageNum, pageSize);
@@ -69,5 +73,9 @@ public class BlogDetailServiceImpl implements BlogDetailService {
         }
 
         return new PageInfo<BlogDetail>(blogDetails);
+    }
+
+    public List<BlogDetail> getAllBlogDetailsByTitle(String searchText) throws Exception {
+        return blogDetailMapper.findAllByTitle(searchText);
     }
 }

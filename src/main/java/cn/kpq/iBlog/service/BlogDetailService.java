@@ -4,6 +4,7 @@ import cn.kpq.iBlog.entity.BlogDetail;
 import com.github.pagehelper.PageInfo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by alibct on 2017/5/4.
@@ -17,4 +18,6 @@ public interface BlogDetailService {
     PageInfo<BlogDetail> getAllBlogs(int pageNum, int pageSize) throws Exception;
 
     PageInfo<BlogDetail> getBlogsByBlogger(Serializable createBy, int pageNum, int pageSize) throws Exception;
+
+    List<BlogDetail> getAllBlogDetailsByTitle(String searchText) throws Exception;
 }

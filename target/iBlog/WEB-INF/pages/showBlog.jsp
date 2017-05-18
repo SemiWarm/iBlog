@@ -119,7 +119,7 @@
                 <span class="text-muted">${createAt} |</span>
                 <span class="text-muted">字数 ${blogDetail.wordCount} |</span>
                 <span class="text-muted">阅读 ${blogDetail.blogHits} |</span>
-                <span class="text-muted">评论 ${blogDetail.blogComments} |</span>
+                <span class="text-muted">评论 ${commentsCount} |</span>
                 <span class="text-muted">喜欢 ${blogDetail.blogStars}</span>
             </div>
         </div>

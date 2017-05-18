@@ -22,4 +22,6 @@ public interface BloggerMapper extends BaseMapper<Blogger> {
     List<Blogger> findAll();
 
     Blogger verifyByAccount(Blogger blogger);
+
+    List<Blogger> findAllByBloggerName(String searchText);
 }

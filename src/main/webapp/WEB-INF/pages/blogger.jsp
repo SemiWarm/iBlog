@@ -14,6 +14,7 @@
     <title>博主管理</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/sweetalert.css">
     <style>
         body {
             padding-top: 20px;
@@ -37,7 +38,7 @@
             </ul>
         </div>
     </div>
-    <!-- 添加博主 -->
+
     <div class="row">
 
         <div class="col-lg-12 paddingTop">
@@ -48,8 +49,9 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="">
-                                <span class="input-group-btn"><button class="btn btn-default" type="button"><span
+                                <input type="text" id="searchText" class="form-control" placeholder="按昵称模糊查询">
+                                <span class="input-group-btn"><button class="btn btn-default" id="btnSearch"
+                                                                      type="button"><span
                                         class="glyphicon glyphicon-search"></span></button></span>
                             </div>
                         </div>
@@ -61,9 +63,8 @@
                         <div class="col-lg-3">
                             <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button id="btnEdit" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                    <button class="btn btn-default"><span class="glyphicon glyphicon-trash"></span>
+                                    <button id="btnDelete" class="btn btn-default"><span
+                                            class="glyphicon glyphicon-trash"></span>
                                     </button>
                                 </div>
                             </div>
@@ -160,8 +161,13 @@
 <script src="<%=request.getContextPath()%>/static/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/bootstrap-table.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/bootstrap-table-zh-CN.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/sweetalert.min.js"></script>
 <script type="text/javascript">
     var bloggerTable = $('#bloggerTable');
+    var btnSearch = $('#btnSearch');
+    var search = $('#searchText');
+
+    var btnDelete = $('#btnDelete');
 
     $('#imagePreviewModal').on('show.bs.modal', function (e) {
         // 获取启动模态框的对象
@@ -170,11 +176,56 @@
         $('.modal-body').html("<img src='" + bloggerAvatarUrl.val() + "' alt=''>");
     });
 
-    var btnEdit = $('#btnEdit');
-    btnEdit.bind('click',function () {
-       var selectedRow = bloggerTable.bootstrapTable('getSelections');
-       var bloggerId = selectedRow[0]["bloggerId"];
-       console.log(bloggerId);
+    btnSearch.bind('click', function () {
+        var searchText = search.val();
+        $.ajax({
+            type: 'post',
+            url: '<%=request.getContextPath()%>/searchBlogger',
+            data: {"searchText": searchText},
+            async: true,
+            success: function (response) {
+                console.log(response);
+                bloggerTable.bootstrapTable('load', response);
+            },
+            error: function (errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+    });
+
+    btnDelete.bind('click', function () {
+        var selectedRow = bloggerTable.bootstrapTable('getSelections');
+        var bloggerId = selectedRow[0]["bloggerId"];
+        console.log(bloggerId);
+        sweetAlert({
+            title: "提示信息",
+            text: "确定要删除该用户吗?删除后不可恢复哦!",
+            type: "info",
+            showCancelButton: true,
+            cancelButtonText: "取消",
+            confirmButtonText: "确定",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type: 'post',
+                    url: '<%=request.getContextPath()%>/delete/blogger',
+                    data: {"bloggerId": bloggerId},
+                    success: function (response) {
+                        if (response["success"] === 1) {
+                            swal({title: "提示信息", text: response["message"], type: "success"}, function () {
+                                bloggerTable.bootstrapTable('refresh');
+                            });
+                        }
+                    },
+                    error: function (errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            } else {
+            }
+        });
     });
 </script>
 </body>

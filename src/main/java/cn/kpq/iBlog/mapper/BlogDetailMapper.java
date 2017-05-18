@@ -17,4 +17,6 @@ public interface BlogDetailMapper extends BaseMapper<BlogDetail> {
     List<BlogDetail> findAll();
 
     List<BlogDetail> findByBlogger(Serializable createBy);
+
+    List<BlogDetail> findAllByTitle(String searchText);
 }
