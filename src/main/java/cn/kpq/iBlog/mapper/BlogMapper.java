@@ -19,4 +19,6 @@ public interface BlogMapper extends BaseMapper<Blog> {
     Blog findById(Serializable id);
 
     List<Blog> findAll();
+
+    List<Blog> findByCreateBy(Serializable bloggerId);
 }

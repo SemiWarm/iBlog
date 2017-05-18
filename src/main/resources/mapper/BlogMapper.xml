@@ -5,7 +5,8 @@
     <insert id="add" parameterType="cn.kpq.iBlog.entity.Blog">
         INSERT INTO Blog (blog_id, blog_title, blog_markdown_content, blog_html_content, blog_thum, word_count, create_by, create_at, status)
         VALUES
-            (#{blogId}, #{blogTitle}, #{blogMarkdownContent}, #{blogHtmlContent},#{blogThum}, #{wordCount}, #{createBy}, #{createAt}, #{status});
+            (#{blogId}, #{blogTitle}, #{blogMarkdownContent}, #{blogHtmlContent}, #{blogThum}, #{wordCount},
+             #{createBy}, #{createAt}, #{status});
     </insert>
     <delete id="delete" parameterType="cn.kpq.iBlog.entity.Blog">
         DELETE FROM Blog
@@ -13,12 +14,11 @@
     </delete>
     <update id="update" parameterType="cn.kpq.iBlog.entity.Blog">
         UPDATE Blog
-        SET blog_title   = #{blogTitle},
+        SET blog_title            = #{blogTitle},
             blog_markdown_content = #{blogMarkdownContent},
-            blog_html_content = #{blogHtmlContent},
-            blog_thum    = #{blogThum},
-            word_count   = #{wordCount},
-            status       = #{status}
+            blog_html_content     = #{blogHtmlContent},
+            blog_thum             = #{blogThum},
+            word_count            = #{wordCount}
         WHERE blog_id = #{blogId};
     </update>
     <select id="findById" parameterType="cn.kpq.iBlog.entity.Blog" resultType="cn.kpq.iBlog.entity.Blog">
@@ -29,5 +29,10 @@
     <select id="findAll" resultType="cn.kpq.iBlog.entity.Blog">
         SELECT *
         FROM Blog
+    </select>
+    <select id="findByCreateBy" parameterType="java.lang.Long" resultType="cn.kpq.iBlog.entity.Blog">
+        SELECT *
+        FROM Blog
+        WHERE create_by = #{bloggerId}
     </select>
 </mapper>

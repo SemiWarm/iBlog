@@ -60,4 +60,8 @@ public class BlogServiceImpl implements BlogService {
         return blogMapper.findAll();
     }
 
+    public List<Blog> getAllBlogsByBloggerId(Long bloggerId) throws Exception {
+        return blogMapper.findByCreateBy(bloggerId);
+    }
+
 }

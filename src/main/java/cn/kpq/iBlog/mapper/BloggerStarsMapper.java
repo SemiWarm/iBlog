@@ -21,4 +21,7 @@ public interface BloggerStarsMapper {
 
     // 根据博主id获取博主的关注所有信息
     List<BloggerStars> findAllById(Serializable bloggerId);
+
+    // 获取博主的被关注个数
+    List<BloggerStars> findAllByStar(Serializable bloggerId);
 }

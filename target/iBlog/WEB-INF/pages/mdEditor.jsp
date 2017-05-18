@@ -177,7 +177,6 @@
                 showLoaderOnConfirm: true
             },
             function () {
-
                 setTimeout(function () {
 
                     $.ajax({

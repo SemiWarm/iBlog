@@ -9,7 +9,8 @@
         DELETE FROM BloggerStars
         WHERE blogger_id = #{bloggerId} AND star_blogger_id = #{starBloggerId}
     </delete>
-    <select id="findById" parameterType="cn.kpq.iBlog.entity.BloggerStars" resultType="cn.kpq.iBlog.entity.BloggerStars">
+    <select id="findById" parameterType="cn.kpq.iBlog.entity.BloggerStars"
+            resultType="cn.kpq.iBlog.entity.BloggerStars">
         SELECT *
         FROM BloggerStars
         WHERE blogger_id = #{bloggerId} AND star_blogger_id = #{starBloggerId}
@@ -18,9 +19,14 @@
         SELECT *
         FROM BloggerStars
     </select>
-    <select id="findAllById" parameterType="java.lang.Long">
+    <select id="findAllById" parameterType="java.lang.Long" resultType="cn.kpq.iBlog.entity.BloggerStars">
         SELECT *
         FROM BloggerStars
         WHERE blogger_id = #{bloggerId}
+    </select>
+    <select id="findAllByStar" parameterType="java.lang.Long" resultType="cn.kpq.iBlog.entity.BloggerStars">
+        SELECT *
+        FROM BloggerStars
+        WHERE star_blogger_id = #{bloggerId}
     </select>
 </mapper>

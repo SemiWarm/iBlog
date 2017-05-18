@@ -29,6 +29,10 @@ public class BloggerServiceImpl implements BloggerService {
         return bloggerMapper.add(blogger);
     }
 
+    public int updateBlogger(Blogger blogger) throws Exception {
+        return bloggerMapper.update(blogger);
+    }
+
     public int deleteBlogger(Blogger blogger) throws Exception {
         return bloggerMapper.delete(blogger);
     }

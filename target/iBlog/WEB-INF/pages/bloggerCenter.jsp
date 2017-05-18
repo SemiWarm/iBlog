@@ -17,23 +17,15 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>个人中心</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/style.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/editormd.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/fileinput.min.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/sweetalert.css"/>
     <style>
         body {
             padding-top: 70px;
-        }
-
-        .hide {
-            position: absolute;
-            display: block!important;
-            width: 82px;
-            opacity: 0;
         }
     </style>
 </head>
@@ -93,11 +85,11 @@
         </div>
     </nav>
 </div>
-<div id="container">
+<div class="container">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <p class="text-center">
-                <img class="img-circle" src="${blogger.bloggerAvatar}" alt="${blogger.bloggerName}"
+                <img class="img-circle" id="avatar" src="${blogger.bloggerAvatar}" alt="${blogger.bloggerName}"
                      style="width: 90px;height: 90px;">
             </p>
         </div>
@@ -105,16 +97,19 @@
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <p class="text-center">
-                <a class="btn btn-link">
-                    <input id="bloggerAvatar" type="file" class="hide" onchange="resetAvatar()">
-                    点击修改头像
-                </a>
+                上传修改头像
             </p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="bloggerAvatarUploader" class="col-lg-2 control-label">上传修改头像</label>
+                    <div class="col-lg-9">
+                        <input type="file" class="form-control" id="bloggerAvatarUploader" name="image">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="bloggerId" class="col-lg-2 control-label">博主Id</label>
                     <div class="col-lg-9">
@@ -150,11 +145,64 @@
 <script src="<%=request.getContextPath()%>/static/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/editormd.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/fileinput.min.js"></script>
+<script src="<%=request.getContextPath()%>/static/js/zh.js"></script>
 <script src="<%=request.getContextPath()%>/static/js/sweetalert.min.js"></script>
 <script type="text/javascript">
-    function resetAvatar() {
-        console.log(this.value);
-    }
+    var bloggerAvatarUploader = $('#bloggerAvatarUploader');
+    var btnSaveBlogger = $('#btnSaveBlogger');
+    var avatarUrl = "";
+    $(function () {
+        bloggerAvatarUploader.fileinput({
+            language: 'zh', // 设置语言
+            uploadUrl: '<%=request.getContextPath()%>/upload/avatar/image', // 上传地址
+            allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg'], // 允许上传的文件后缀
+            showRemove: true, // 是否显示移除按钮
+            removeClass: 'btn btn-warning', // 移除按钮主题
+            showUpload: false, // 是否显示上传按钮
+            showCaption: true, // 是否显示标题
+            dropZoneEnabled: false,
+            minFileCount: 1, // 最少文件数量
+            maxFileCount: 1, // 最多文件数量
+            enctype: 'multipart/form-data'
+        });
+
+        bloggerAvatarUploader.on('fileuploaded', function (event, data) {
+            var response = data.response;
+            var avatar = window.document.getElementById('avatar');
+            avatar.src = response["url"];
+            console.log(avatar.src);
+            avatarUrl = response["url"];
+        });
+    });
+
+    btnSaveBlogger.bind('click', function () {
+        $.ajax({
+            type: 'post',
+            url: '<%=request.getContextPath()%>/update/blogger',
+            data: {
+                "bloggerId":<%=bloggerId%>,
+                "bloggerName": $('#bloggerName').val(),
+                "bloggerProfile": $('#bloggerProfile').val(),
+                "bloggerAvatar": avatarUrl
+            },
+            async: true,
+            success: function (response) {
+                if (response["success"] === 1) {
+                    sweetAlert({title: "提示信息", text: response["message"], type: "success"}, function () {
+                        window.location.reload();
+                    });
+                } else {
+                    sweetAlert({title: "提示信息", text: response["message"], type: "error"}, function () {
+                        window.location.reload();
+                    });
+                }
+            },
+            error: function (errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+    });
 </script>
 </body>
 </html>

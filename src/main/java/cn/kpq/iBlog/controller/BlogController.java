@@ -1,10 +1,7 @@
 package cn.kpq.iBlog.controller;
 
 import cn.kpq.iBlog.entity.*;
-import cn.kpq.iBlog.service.impl.BlogDetailServiceImpl;
-import cn.kpq.iBlog.service.impl.BlogServiceImpl;
-import cn.kpq.iBlog.service.impl.BloggerServiceImpl;
-import cn.kpq.iBlog.service.impl.CommentsServiceImpl;
+import cn.kpq.iBlog.service.impl.*;
 import cn.kpq.iBlog.utils.CommonDateUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +26,19 @@ public class BlogController {
 
     private final BlogServiceImpl blogService;
     private final BloggerServiceImpl bloggerService;
+    private final BlogInfoServiceImpl blogInfoService;
     private final BlogDetailServiceImpl blogDetailService;
     private final CommentsServiceImpl commentsService;
 
     @Autowired
-    public BlogController(BlogServiceImpl blogService, BloggerServiceImpl bloggerService, BlogDetailServiceImpl blogDetailService, CommentsServiceImpl commentsService) {
+    public BlogController(BlogServiceImpl blogService,
+                          BloggerServiceImpl bloggerService,
+                          BlogInfoServiceImpl blogInfoService,
+                          BlogDetailServiceImpl blogDetailService,
+                          CommentsServiceImpl commentsService) {
         this.blogService = blogService;
         this.bloggerService = bloggerService;
+        this.blogInfoService = blogInfoService;
         this.blogDetailService = blogDetailService;
         this.commentsService = commentsService;
     }
@@ -74,6 +77,46 @@ public class BlogController {
         return response;
     }
 
+    @RequestMapping(value = "/delete/blog", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public BaseResponse<Blog> deleteBlog(Long blogId) throws Exception {
+        BaseResponse<Blog> response = new BaseResponse<Blog>();
+        Blog blog = new Blog();
+        blog.setBlogId(blogId);
+        int result = blogService.deleteBlog(blog);
+        if (result > 0) {
+            response.setSuccess(1);
+            response.setMessage("删除成功!");
+            response.setData(null);
+        } else {
+            response.setSuccess(0);
+            response.setMessage("删除失败!");
+            response.setData(null);
+        }
+        return response;
+    }
+
+
+    @RequestMapping(value = "/update/blog", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public BaseResponse<Blog> updateBlog(Blog blog) throws Exception {
+        BaseResponse<Blog> response = new BaseResponse<Blog>();
+
+        int result = blogService.updateBlog(blog);
+
+        if (result > 0) {
+            response.setSuccess(1);
+            response.setMessage("文章修改成功!是否查看?");
+            response.setData(blog);
+        } else {
+            response.setSuccess(0);
+            response.setMessage("文章修改失败!是否重试?");
+            response.setData(null);
+        }
+
+        return response;
+    }
+
     @RequestMapping(value = "/blogs/pageNum/{pageNum}/pageSize/{pageSize}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public PageInfo<BlogDetail> getAllBlogs(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
@@ -84,13 +127,25 @@ public class BlogController {
     @RequestMapping(value = "/blogs/createBy/{createBy}/pageNum/{pageNum}/pageSize/{pageSize}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public PageInfo<BlogDetail> getBlogsByBlogger(@PathVariable("createBy") Long createBy, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        return blogDetailService.getBlogsByBlogger(createBy, pageNum, pageSize);
+        // 这里还需要获取文章的评论数量
+        PageInfo<BlogDetail> pageInfo = blogDetailService.getBlogsByBlogger(createBy, pageNum, pageSize);
+        List<BlogDetail> blogDetails = pageInfo.getList();
+        for (BlogDetail blogDetail : blogDetails) {
+            int commentCount = commentsService.getAllCommentsByBlogId(blogDetail.getBlogId()).size();
+            blogDetail.setBlogComments((long) commentCount);
+        }
+        return pageInfo;
     }
 
     @RequestMapping(value = "/showBlog/id/{blogId}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public ModelAndView showBlog(@PathVariable("blogId") Long blogId) throws Exception {
         ModelAndView view = new ModelAndView("showBlog");
+
+        BlogInfo blogInfo = blogInfoService.getBlogInfoById(blogId);
+        blogInfo.setBlogHits(blogInfo.getBlogHits() + 1);
+        blogInfoService.updateBlogInfo(blogInfo);
+
         // 根据blogId获取需要的博文信息
         BlogDetail blogDetail = blogDetailService.getBlogDetailByBlogId(blogId);
 
@@ -124,6 +179,14 @@ public class BlogController {
         view.addObject("commentBloggers", bloggers);
         view.addObject("commentTimeList", commentTimeList);
 
+        return view;
+    }
+
+    @RequestMapping(value = "/edit/{blogId}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public ModelAndView editor(@PathVariable("blogId") Long blogId) throws Exception {
+        ModelAndView view = new ModelAndView("mdEditorEdit");
+        Blog blog = blogService.getBlogById(blogId);
+        view.addObject("Blog", blog);
         return view;
     }
 

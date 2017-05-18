@@ -2,8 +2,10 @@ package cn.kpq.iBlog.controller;
 
 import cn.kpq.iBlog.entity.BaseResponse;
 import cn.kpq.iBlog.entity.Blogger;
+import cn.kpq.iBlog.service.impl.BlogServiceImpl;
 import cn.kpq.iBlog.service.impl.BloggerServiceImpl;
 import cn.kpq.iBlog.service.impl.BloggerStarsServiceImpl;
+import cn.kpq.iBlog.service.impl.CommentsServiceImpl;
 import cn.kpq.iBlog.utils.CommonDateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,12 +27,16 @@ import java.util.List;
 public class BloggerController {
 
     private final BloggerServiceImpl bloggerService;
+    private final BlogServiceImpl blogService;
     private final BloggerStarsServiceImpl bloggerStarsService;
+    private final CommentsServiceImpl commentsService;
 
     @Autowired
-    public BloggerController(BloggerServiceImpl bloggerService, BloggerStarsServiceImpl bloggerStarsService) {
+    public BloggerController(BloggerServiceImpl bloggerService, BlogServiceImpl blogService, BloggerStarsServiceImpl bloggerStarsService, CommentsServiceImpl commentsService) {
         this.bloggerService = bloggerService;
+        this.blogService = blogService;
         this.bloggerStarsService = bloggerStarsService;
+        this.commentsService = commentsService;
     }
 
     /**
@@ -51,6 +57,24 @@ public class BloggerController {
         }
 
         return bloggers;
+    }
+
+    @RequestMapping(value = "/update/blogger", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public BaseResponse<Blogger> updateBlogger(Blogger blogger) throws Exception {
+        BaseResponse<Blogger> response = new BaseResponse<Blogger>();
+        int result = bloggerService.updateBlogger(blogger);
+        if (result > 0) {
+            response.setSuccess(1);
+            response.setMessage("更新成功!");
+            response.setData(blogger);
+        } else {
+            response.setSuccess(1);
+            response.setMessage("更新失败!");
+            response.setData(null);
+        }
+
+        return response;
     }
 
     /**
@@ -102,7 +126,16 @@ public class BloggerController {
 
         String createAt = CommonDateUtils.getFromatDate(blogger.getCreateAt());
 
+        int blogCount = blogService.getAllBlogsByBloggerId(bloggerId).size(); // 文章个数
+
+        int blogStarCount = bloggerStarsService.getAllBloggerStarsById(bloggerId).size(); // 博主关注的人数
+
+        int blogStaredCount = bloggerStarsService.getAllBloggerStarsByStar(bloggerId).size(); // 博主被关注次数
+
+        view.addObject("blogCount", blogCount);
         view.addObject("blogger", blogger);
+        view.addObject("blogStarCount",blogStarCount);
+        view.addObject("blogStaredCount",blogStaredCount);
         view.addObject("createAt", createAt);
         return view;
     }

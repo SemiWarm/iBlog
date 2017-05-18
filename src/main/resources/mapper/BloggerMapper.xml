@@ -14,8 +14,6 @@
     <update id="update" parameterType="cn.kpq.iBlog.entity.Blogger">
         UPDATE Blogger
         SET blogger_name    = #{bloggerName},
-            blogger_account = #{bloggerAccount},
-            login_password  = #{loginPassword},
             blogger_profile = #{bloggerProfile},
             blogger_avatar  = #{bloggerAvatar}
         WHERE blogger_id = #{bloggerId}

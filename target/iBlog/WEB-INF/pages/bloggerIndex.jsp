@@ -96,7 +96,8 @@
                                 </li>
                                 <li><a href="#"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;喜欢的文章</a>
                                 </li>
-                                <li><a href="<%=request.getContextPath()%>/bloggerCenter/<%=bloggerId%>"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人信息</a>
+                                <li><a href="<%=request.getContextPath()%>/bloggerCenter/<%=bloggerId%>"><span
+                                        class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人信息</a>
                                 </li>
                                 <li><a href="<%=request.getContextPath()%>/quit"><span
                                         class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;退出</a></li>
@@ -136,10 +137,9 @@
             <div class="row" style="padding-top: 8px">
                 <div class="col-lg-12">
                     <span class="text-muted">${createAt} |</span>
-                    <span class="text-muted">关注 99 |</span>
-                    <span class="text-muted">粉丝 999 |</span>
-                    <span class="text-muted">文章 9 |</span>
-                    <span class="text-muted">收获喜欢 999</span>
+                    <span class="text-muted">关注 ${blogStarCount} |</span>
+                    <span class="text-muted">粉丝 ${blogStaredCount} |</span>
+                    <span class="text-muted">文章 ${blogCount} |</span>
                 </div>
             </div>
             <div class="row" style="padding-top: 8px">
@@ -149,7 +149,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-10" style="padding-top: 5px">
-                    不会烧菜的程序员不是一个好厨子
+                    ${blogger.bloggerProfile}
                 </div>
             </div>
         </div>
@@ -200,6 +200,50 @@
     var dropdownMenu = $('#dropdownMenu');
     var btnStar = $('#btnStar');
     var btnMore = $('#btnMore');
+    function deleteBlog(blogId) {
+        console.log(blogId);
+        sweetAlert(
+            {
+                title: "提示信息",
+                text: "确定要删除?",
+                type: "info",
+                showCancelButton: true,
+                cancelButtonText: "取消",
+                confirmButtonText: "确定",
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            }, function () {
+                setTimeout(function () {
+
+                    $.ajax({
+                        type: 'post',
+                        url: '<%=request.getContextPath()%>/delete/blog',
+                        data: {
+                            'blogId': blogId
+                        },
+                        async: false,
+                        success: function (response) {
+                            if (response["success"] === 1) {
+                                swal({
+                                        title: "提示信息",
+                                        text: response["message"],
+                                        type: "success"
+                                    },
+                                    function () {
+                                        window.location.reload();
+                                    });
+                            } else {
+                                swal("提示信息", "删除失败!", "error");
+                            }
+                        },
+                        error: function (errorMessage) {
+                            sweetAlert("出错啦!", errorMessage, "error");
+                        }
+                    });
+
+                }, 2000);
+            });
+    }
     $(function () {
         var bloggerName = '<%=bloggerName%>';
         if (bloggerName === 'null') {
@@ -207,7 +251,7 @@
         } else {
             btnLogin.css("display", "none");
             if (bloggerName === '${blogger.bloggerName}') {
-                btnStar.css("display","none");
+                btnStar.css("display", "none");
             } else {
                 // 如果不是本人就需要获取关注状态
                 // 需要进行ajax请求
@@ -293,6 +337,7 @@
                     var blogCollections = blogDetail["blogCollections"];
                     var blogComments = blogDetail["blogComments"];
                     var blogUrl = "<%=request.getContextPath()%>/showBlog/id/" + blogId;
+                    var editBlogUrl = "<%=request.getContextPath()%>/edit/" + blogId;
                     blogDetailHtml +=
                         "<div class='col-lg-12'>" +
                         "<div class='row vertical-align'>" +
@@ -305,9 +350,9 @@
                         "</div>" +
                         "<div class='col-lg-9 btn-toolbar' role='toolbar'>" +
                         "<div class='btn-group pull-right' role='group' >" +
-                        "<a href='#' class='btn btn-default'><span class='glyphicon glyphicon-pencil'></span>" +
+                        "<a href='" + editBlogUrl + "' class='btn btn-default'><span class='glyphicon glyphicon-pencil'></span>" +
                         "</a>" +
-                        "<a href='#' class='btn btn-default'><span class='glyphicon glyphicon-trash'></span>" +
+                        "<a href='javascript:void(0);' class='btn btn-default' onclick='deleteBlog(" + blogId + ")'><span class='glyphicon glyphicon-trash'></span>" +
                         "</a>" +
                         "</div>" +
                         "</div>" +
@@ -383,6 +428,7 @@
                         var blogCollections = blogDetail["blogCollections"];
                         var blogComments = blogDetail["blogComments"];
                         var blogUrl = "<%=request.getContextPath()%>/showBlog/id/" + blogId;
+                        var editBlogUrl = "<%=request.getContextPath()%>/edit/" + blogId;
                         blogDetailHtml +=
                             "<div class='col-lg-12'>" +
                             "<div class='row vertical-align'>" +
@@ -395,9 +441,9 @@
                             "</div>" +
                             "<div class='col-lg-9 btn-toolbar' role='toolbar'>" +
                             "<div class='btn-group pull-right' role='group' >" +
-                            "<a href='#' class='btn btn-default'><span class='glyphicon glyphicon-pencil'></span>" +
+                            "<a href='" + editBlogUrl + "' class='btn btn-default'><span class='glyphicon glyphicon-pencil'></span>" +
                             "</a>" +
-                            "<a href='#' class='btn btn-default'><span class='glyphicon glyphicon-trash'></span>" +
+                            "<a href='javascript:void(0);' class='btn btn-default' onclick='deleteBlog(" + blogId + ")'><span class='glyphicon glyphicon-trash'></span>" +
                             "</a>" +
                             "</div>" +
                             "</div>" +

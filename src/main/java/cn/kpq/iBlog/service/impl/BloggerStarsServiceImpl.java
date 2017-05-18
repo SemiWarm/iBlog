@@ -38,4 +38,8 @@ public class BloggerStarsServiceImpl implements BloggerStarsService {
     public List<BloggerStars> getAllBloggerStarsById(Serializable bloggerId) throws Exception {
         return bloggerStarsMapper.findAllById(bloggerId);
     }
+
+    public List<BloggerStars> getAllBloggerStarsByStar(Serializable bloggerId) throws Exception {
+        return bloggerStarsMapper.findAllByStar(bloggerId);
+    }
 }
